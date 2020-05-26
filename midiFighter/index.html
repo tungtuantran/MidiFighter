@@ -1,0 +1,29 @@
+<html>
+<head>
+    <script type="module" src="./src/main.js"></script>
+ 
+</head>
+<body>
+        <label for="beatDropdown">Choose background beat:</label>
+        <select name="beatDropdown" id="beatDropdown">
+            <option value="Basic_Rock_135.wav">Basic_Rock_135</option>
+            <option value="Boom_Chuk_130.wav">Boom_Chuck_130</option>
+        </select>
+
+        <button type="button" id="playPause">PLAY</button></br>      
+
+        <label>Speed:  </label></br>
+        <input id="speed" type="range" name="speed" min="0" max="2" value="1.0" step="0.10"></br>    
+        <label>Volume:  </label></br>
+        <input id="volume" type="range" name="volume" min="0" max="1" value="1.0" step="0.10"></br>    
+        <label>Highpass:</label></br> 
+        <input id="highpassfilter" type="range" name="high" min="0" max="25" value="0"  step="0.5"></br>    
+        <label>Midpass: </label></br>    
+        <input id="midpassfilter" type="range" name="mid" min="0" max="25" value="0" step="0.5"></br>    
+        <label>Lowpass: </label></br>    
+        <input id="lowpassfilter" type="range" name="low" min="0" max="25" value="0" step="0.5"></br>  
+        </br>  
+        <canvas id="canvas" width="200" height="100"></canvas> 
+
+</body>
+</html>
