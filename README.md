@@ -10,6 +10,8 @@
 
 Hinweis: .gitignore enthält node_modules
 
+Zum starten des Servers `npm start` ausführen.
+
 
 
 ## Allgemeines
