@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import MusicButton from './musicButton';
+import PadSoundPlayer from '../audio/padSound.js';
+
+
 
 
 class ButtonPad extends Component {
     state = {
         buttons: [
-            {id: 1, value: "kick11"},
-            {id: 2, value: "boom"},
-            {id: 3, value: "yeah"},
-            {id: 4, value: "haha11"},
+            {id: 1, value: "."},
+            {id: 2, value: "."},
+            {id: 3, value: "."},
+            {id: 4, value: "."},
 
             {id: 5, value: "."},
             {id: 6, value: "."},
@@ -20,16 +23,24 @@ class ButtonPad extends Component {
             {id: 11, value: "."},
             {id: 12, value: "."}
         ]
-    };
+    };                              //value should me filename (value.wav)
 
     handleMusicButtonClicked(musicButtonId){
-        console.log("hey clicked"+musicButtonId);
+        console.log("hey clicked "+musicButtonId);
+        
+        let buttons = [...this.state.buttons];
+        
         if(this.props.mappingSound){
-            let buttons = [...this.state.buttons];
             buttons[musicButtonId-1].value = this.props.mappingSound;
             this.props.onMappingDone("");
+
+            this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
+            this.player.audioCtx.resume();
             return;
         }
+        
+        this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
+        this.player.audioCtx.resume();
     }
 
 

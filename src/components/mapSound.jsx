@@ -40,9 +40,8 @@ class MapSound extends Component {
             {dropdownText}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" id="alertMe" href="#">Action</a>
-            <a class="dropdown-item" href="#">kick1</a>
-            <a class="dropdown-item" href="#">boom1</a>
+            <a class="dropdown-item" href="#">808</a>
+            <a class="dropdown-item" href="#">kick</a>
             </div>
             </div>
 

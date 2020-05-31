@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import BackgroundBeatPlayer from '../audio/BackgroundBeat.js';
+
 
 
 class MusicButton extends Component {
@@ -17,6 +19,7 @@ class MusicButton extends Component {
 
     handlePlay(){
         this.props.onClickButton(this.props.id);
+        //console.log("heyhey"+this.props.id);
     }
 
 

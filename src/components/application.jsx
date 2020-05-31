@@ -48,7 +48,7 @@ class Application extends Component {
             <BackgroundBeat audioCtx={this.audioCtx} analyserNode={this.analyser}/>
             </div>
             <div class="col-md-6">
-            <ButtonPad mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping} />
+            <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser} mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping} />
             </div>
             <div class="col-sm-3">
             <Visualizer analyserNode={this.analyser}/>

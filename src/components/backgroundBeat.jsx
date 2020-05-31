@@ -35,7 +35,7 @@ class BackgroundBeat extends Component {
 
     handleSoundChoosen(choosenSound){
         this.soundToPlay=choosenSound;
-        if(this.player  !== undefined  ){//if the user changes the beatAudio while it is already playing
+        if(this.player !== undefined){//if the user changes the beatAudio while it is already playing
             this.player.stopAndDisconnect();
             this.player = new BackgroundBeatPlayer(process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav', this.props.audioCtx, this.props.analyserNode);
             if(this.state.playingButton == "Play"){this.player.audioCtx.suspend();}
