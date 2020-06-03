@@ -10,9 +10,9 @@ class Visualizer extends Component {
         this.draw = this.draw.bind(this);
     }
 
-    handleSoundChoosen(choosenSound){
-        this.props.onMapping(choosenSound);
-    }
+    //handleSoundChoosen(choosenSound){
+    //this.props.onMapping(choosenSound);
+    //}
 
 
     draw() {

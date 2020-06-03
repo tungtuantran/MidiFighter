@@ -52,6 +52,8 @@ Der `src` Ordner enthält den gesamten JavaScript-Code des Projekts. Im `src` Or
 In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Background-Beat-Funktionalität genutzt werden.
 
 ## Anwendungsarchitektur
+
+![Papierprototyp](https://i.ibb.co/b7NRLLv/uml-Midi-Fighter.png)
 - mit react entwickelt
 - anwendung aus componenten-klassen zusammengesetzt
 - web audio api
