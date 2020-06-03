@@ -8,7 +8,7 @@
 
 3. `npm install`  -> um alle benötigten Abhängigkeiten zu instalieren
 
-Hinweis: .gitignore enthält node_modules
+Hinweis: .gitignore enthält den Ordner node_modules
 
 ## Benutzung
 
@@ -40,9 +40,9 @@ Ausgehend von den formulierten Anforderungen, hat jedes Gruppenmitglied einen lo
 
 ![Papierprototyp](https://i.ibb.co/ky2XVZ8/paper-Prototype.jpg)
 
-Die Benutzeroberfläche besteht aus vier Ebenen: Button-Pad, BackgroundBeat, Mapping-Bereich und Visualizer-Bereich.
+Die auf der Abbildung zu sehende Benutzeroberfläche besteht aus vier Ebenen: Button-Pad, BackgroundBeat, Mapping-Bereich und Visualizer-Bereich.
 
-Der Button-Pad ist die Haupt-Inputquelle des Synthesizers: es ist eine Klaviatur, die 12 unterschiedliche Buttons hat, die durch Maus-Click oder PC-Tastatur betätigt werden können. Der Mapping-Bereich erlaubt es dem Benutzer bestimmte Klänge auszuwählen, sodass diese dann den einzelnen Buttons zugewiesen werden können. Beim BackgroundBeat-Bereich hat man als Benutzer die Möglcihekeit einen Klang auszuwählen, der ununterbrochen im Hintergrund abgespielt wird. Die Benutzer können dabei die Lautstärke und die Geschwindigkeit des BackgroundBeats einzustellen. Im Visualizer-Beriech wird, sowohl der BackgrundBeat, als auch die, mithilfe des Button-Pads erzeugten, Klänge visualisiert.
+Der Button-Pad ist die Haupt-Inputquelle des Synthesizers: es ist eine Klaviatur, die 12 unterschiedliche Buttons hat, die durch Maus-Click oder PC-Tastatur betätigt werden können. Die Button-Anordnung orientiert sich dabei an den Drum-Machines, deren Tasten grid-artig angeordent sind (z.B. wie [hier](https://ask.audio/articles/novation-announces-circuit-synth-drum-machine-pad-controller-gridbased-groove-box/de)). Der Mapping-Bereich erlaubt es dem Benutzer bestimmte Klänge auszuwählen, sodass diese dann den einzelnen Buttons zugewiesen werden können. Beim BackgroundBeat-Bereich hat man als Benutzer die Möglcihekeit einen Klang auszuwählen, der ununterbrochen im Hintergrund abgespielt wird. Die Benutzer können dabei die Lautstärke und die Geschwindigkeit des BackgroundBeats einzustellen. Im Visualizer-Beriech wird, sowohl der BackgrundBeat, als auch die, mithilfe des Button-Pads erzeugten, Klänge visualisiert.
 
 
 ## Ordnerstruktur
