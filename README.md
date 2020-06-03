@@ -20,9 +20,9 @@ Zum starten des Servers `npm start` ausführen.
 
 Die vorliegende Anwendung wurde im Rahmen des Moduls "Audio- und Videotechnik", and der HTW-Berlin entwickelt. Die implementierte Anwendung ist ein Synthesizer, der es dem Benutzer erlaubt Musik mithilfe von eines Synthesizer-Keyboards und dem auswählbaren Hintergrund-Beat, zu erzeugen. Die Mitglieder des Teams sind:
 
--**Cong Minh Nguyen, 564030**
--..
--**Andrey Borisov, 563858**
+- **Cong Minh Nguyen, 564030**
+- ..
+- **Andrey Borisov, 563858**
 
 
 
@@ -50,3 +50,8 @@ Der Button-Pad ist die Haupt-Inputquelle des Synthesizers: es ist eine Klaviatur
 Der `src` Ordner enthält den gesamten JavaScript-Code des Projekts. Im `src` Ordner sind zwei weitere Ordner enthalten: `components` (enthält die React-Component-Klassen) und `audio` (enthält Klassen, die für Audio-Wiedergabe zuständig sind).
 
 In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Background-Beat-Funktionalität genutzt werden.
+
+## Anwendungsarchitektur
+- mit react entwickelt
+- anwendung aus componenten-klassen zusammengesetzt
+- web audio api
