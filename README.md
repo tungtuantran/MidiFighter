@@ -10,13 +10,37 @@
 
 Hinweis: .gitignore enthält node_modules
 
+## Benutzung
+
 Zum starten des Servers `npm start` ausführen.
 
 
 
 ## Allgemeines
 
-Die vorliegende Anwendung wurde im Rahmen des Moduls "Audio- und Videotechnik", and der HTW-Berlin entwickelt. Die implementierte Anwendung ist ein Synthesizer. Die Benutzeroberfläche besteht aus vier Ebenen: Button-Pad, BackgroundBeat, Mapping-Bereich und Visualizer-Bereich.
+Die vorliegende Anwendung wurde im Rahmen des Moduls "Audio- und Videotechnik", and der HTW-Berlin entwickelt. Die implementierte Anwendung ist ein Synthesizer, der es dem Benutzer erlaubt Musik mithilfe von eines Synthesizer-Keyboards und dem auswählbaren Hintergrund-Beat, zu erzeugen. Die Mitglieder des Teams sind:
+
+-**Cong Minh Nguyen, 564030**
+-..
+-**Andrey Borisov, 563858**
+
+
+
+## Benutzeroberfläche
+
+Nach der Anforderungsanalyse wurden folgende Haupt-Anforderungen an die Anwendung identifiziert:
+
+1. Es sollte ein visuelles Keyboard erstellt werden, das sowohl durch Maus-Clicks als auch durch die Tatstatur gesteuert werden kann. Die Steuerung durch die Tastatur ist wichtig, da man damit schnellere Eingaben machen kann, was für einen Synthesizer sehr wichtig ist.
+
+2. Es ist wichtig, dass der Benutzer außerdem eine Musikspur wählen könnte, die im Hintergrund, begleitend zu der erzeugten Musik, laufen kann (= Background-Beat).
+
+3. Die erzeugte Musik muss visualisiert werden und zwar sowohl die Hintergrundsmusik als auch die, mit dem Keyboard erzeugten, Töne.
+
+Ausgehend von den formulierten Anforderungen, hat jedes Gruppenmitglied einen low fidelity Papierprototypen erstellt. Der nachfolgende Prototyp wurde als Hauptprototyp für das UI der Anwendung genommen:
+
+![Papierprototyp](https://i.ibb.co/ky2XVZ8/paper-Prototype.jpg)
+
+Die Benutzeroberfläche besteht aus vier Ebenen: Button-Pad, BackgroundBeat, Mapping-Bereich und Visualizer-Bereich.
 
 Der Button-Pad ist die Haupt-Inputquelle des Synthesizers: es ist eine Klaviatur, die 12 unterschiedliche Buttons hat, die durch Maus-Click oder PC-Tastatur betätigt werden können. Der Mapping-Bereich erlaubt es dem Benutzer bestimmte Klänge auszuwählen, sodass diese dann den einzelnen Buttons zugewiesen werden können. Beim BackgroundBeat-Bereich hat man als Benutzer die Möglcihekeit einen Klang auszuwählen, der ununterbrochen im Hintergrund abgespielt wird. Die Benutzer können dabei die Lautstärke und die Geschwindigkeit des BackgroundBeats einzustellen. Im Visualizer-Beriech wird, sowohl der BackgrundBeat, als auch die, mithilfe des Button-Pads erzeugten, Klänge visualisiert.
 
