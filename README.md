@@ -42,7 +42,9 @@ Ausgehend von den formulierten Anforderungen, hat jedes Gruppenmitglied einen lo
 
 Die auf der Abbildung zu sehende Benutzeroberfläche besteht aus vier Ebenen: Button-Pad, BackgroundBeat, Mapping-Bereich und Visualizer-Bereich.
 
-Der Button-Pad ist die Haupt-Inputquelle des Synthesizers: es ist eine Klaviatur, die 12 unterschiedliche Buttons hat, die durch Maus-Click oder PC-Tastatur betätigt werden können. Die Button-Anordnung orientiert sich dabei an den Drum-Machines, deren Tasten grid-artig angeordent sind (z.B. wie [hier](https://ask.audio/articles/novation-announces-circuit-synth-drum-machine-pad-controller-gridbased-groove-box/de)). Der Mapping-Bereich erlaubt es dem Benutzer bestimmte Klänge auszuwählen, sodass diese dann den einzelnen Buttons zugewiesen werden können. Beim BackgroundBeat-Bereich hat man als Benutzer die Möglcihekeit einen Klang auszuwählen, der ununterbrochen im Hintergrund abgespielt wird. Die Benutzer können dabei die Lautstärke und die Geschwindigkeit des BackgroundBeats einzustellen. Im Visualizer-Beriech wird, sowohl der BackgrundBeat, als auch die, mithilfe des Button-Pads erzeugten, Klänge visualisiert.
+Der Button-Pad ist die Haupt-Inputquelle des Synthesizers: es ist eine Klaviatur, die 12 unterschiedliche Buttons hat, die durch Maus-Click oder PC-Tastatur betätigt werden können. Die Button-Anordnung orientiert sich dabei an den Drum-Machines, deren Tasten grid-artig angeordent sind (z.B. wie [hier](https://ask.audio/articles/novation-announces-circuit-synth-drum-machine-pad-controller-gridbased-groove-box/de)).
+Der Mapping-Bereich erlaubt es dem Benutzer bestimmte Klänge auszuwählen, sodass diese dann den einzelnen Buttons zugewiesen werden können. Im erstellten Papierprototyp war es so, dass nach dem Auswählen eines Klangs, ein UI-Element erscheint, das per Drag-and-Drop auf einen der Buttons gezogen wird: das würde zwar schön aussehen, ist jedoch langsamer als die Zuweisung per Maus-Klick/Tastatur-Eingabe und da man als Nutzer in der Lage sein sollte schnell Klänge den unterschiedlichen Buttons zuzuweisen, wurde beschlossen dadrauf zu verzichten.
+Beim BackgroundBeat-Bereich hat man als Benutzer die Möglcihekeit einen Klang auszuwählen, der ununterbrochen im Hintergrund abgespielt wird. Die Benutzer können dabei die Lautstärke und die Geschwindigkeit des BackgroundBeats einzustellen. Im Visualizer-Beriech wird, sowohl der BackgrundBeat, als auch die, mithilfe des Button-Pads erzeugten, Klänge visualisiert.
 
 
 ## Ordnerstruktur
@@ -53,7 +55,7 @@ In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Backgr
 
 ## Anwendungsarchitektur
 
-![Papierprototyp](https://i.ibb.co/b7NRLLv/uml-Midi-Fighter.png)
+![UML-Klassendiagramm der Anwendung](https://i.ibb.co/b7NRLLv/uml-Midi-Fighter.png)
 - mit react entwickelt
 - anwendung aus componenten-klassen zusammengesetzt
 - web audio api
