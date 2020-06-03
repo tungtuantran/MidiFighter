@@ -21,7 +21,7 @@ Zum starten des Servers `npm start` ausführen.
 Die vorliegende Anwendung wurde im Rahmen des Moduls "Audio- und Videotechnik", and der HTW-Berlin entwickelt. Die implementierte Anwendung ist ein Synthesizer, der es dem Benutzer erlaubt Musik mithilfe von eines Synthesizer-Keyboards und dem auswählbaren Hintergrund-Beat, zu erzeugen. Die Mitglieder des Teams sind:
 
 - **Cong Minh Nguyen, 564030**
-- ..
+- **Tung Tuan Tran, 564070**
 - **Andrey Borisov, 563858**
 
 
