@@ -57,6 +57,7 @@ In `public/padSoundAudio` sind Audiodateien enthalten, die vom Button-Pad zum Ab
 ## Anwendungsarchitektur
 
 ![UML-Klassendiagramm der Anwendung](https://i.ibb.co/QKwbWxX/uml-Audio-Video.png)
+
 Für die Entwicklung des Front-Ends wurde React ausgewählt. React ist eine JavaScript-Library, die es erlaubt schnell und einfach Front-End für Webseiten zu erstellen. Die Grundlage des Projekts wurde `create-react-app` erzeugt. Mit create-react-app kann eine vorkonfigurierte Entiwcklungsumgebnung mit allen benötigten Libraries und einem Webserver erzeugt werden. Für CSS wurde des Weiteren bootstrap eingesetzt, eine Library, die es erlaubt schnell ästhetisch ansprechende Webseiten-Elemente zu erzeugen. Zur Wiedergabe von Audio wurde die Web Audio API benutzt.
 
 React erlaubt es Webseiten komponentenbasiert zu Entwickeln. Jedes UI Element der Webseite kann als eine getrennte Komponente repräsentiert werden, wobei die einzelnen Komponenten aus anderen Komponenten zusammengesetzt werden können. React stellt dafür die Klasse `Component` zur Verfügung, von der alle erstllten Komponenten erben müssen. Im oben abbgebildeten Klassendiagramm des Projekts sieht man den generellen Aufabau der Anwendung (Die mit grau gekennzeichneten Klassen sind keine React-Komponenten).
