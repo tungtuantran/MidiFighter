@@ -52,10 +52,16 @@ Beim BackgroundBeat-Bereich hat man als Benutzer die Möglcihekeit einen Klang a
 Der `src` Ordner enthält den gesamten JavaScript-Code des Projekts. Im `src` Ordner sind zwei weitere Ordner enthalten: `components` (enthält die React-Component-Klassen) und `audio` (enthält Klassen, die für Audio-Wiedergabe zuständig sind).
 
 In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Background-Beat-Funktionalität genutzt werden.
+In `public/padSoundAudio` sind Audiodateien enthalten, die vom Button-Pad zum Abspielen einzelner Klänge benutzt werden.
 
 ## Anwendungsarchitektur
 
-![UML-Klassendiagramm der Anwendung](https://i.ibb.co/b7NRLLv/uml-Midi-Fighter.png)
-- mit react entwickelt
-- anwendung aus componenten-klassen zusammengesetzt
-- web audio api
+![UML-Klassendiagramm der Anwendung](https://i.ibb.co/QKwbWxX/uml-Audio-Video.png)
+Für die Entwicklung des Front-Ends wurde React ausgewählt. React ist eine JavaScript-Library, die es erlaubt schnell und einfach Front-End für Webseiten zu erstellen. Die Grundlage des Projekts wurde `create-react-app` erzeugt. Mit create-react-app kann eine vorkonfigurierte Entiwcklungsumgebnung mit allen benötigten Libraries und einem Webserver erzeugt werden. Für CSS wurde des Weiteren bootstrap eingesetzt, eine Library, die es erlaubt schnell ästhetisch ansprechende Webseiten-Elemente zu erzeugen. Zur Wiedergabe von Audio wurde die Web Audio API benutzt.
+
+React erlaubt es Webseiten komponentenbasiert zu Entwickeln. Jedes UI Element der Webseite kann als eine getrennte Komponente repräsentiert werden, wobei die einzelnen Komponenten aus anderen Komponenten zusammengesetzt werden können. React stellt dafür die Klasse `Component` zur Verfügung, von der alle erstllten Komponenten erben müssen. Im oben abbgebildeten Klassendiagramm des Projekts sieht man den generellen Aufabau der Anwendung (Die mit grau gekennzeichneten Klassen sind keine React-Komponenten).
+
+Wie man in der Abbildung sehen kann, enthält die Komponente *Application* alle UI-Komponenten der Anwendung. Folgende Komponenten sind in *Application* enthalten: *Visualizer, BackgrundBeat, ButtonPad, MapSound*. Die ButtonPad Komponente enthält MusicButton-Komponenten, die die Buttons des Synthesizers darstellen, repräsentieren und benutzt außerdem die Klasse PadSound zum Abspielen von Klängen. Die BackgroundBeat-Komponente enthält benutzt die Klasse BackgroundBeatPlayer zur Wiedergabe des Hintergrund-Beats.
+
+
+
