@@ -8,21 +8,10 @@ export default class BackgroundBeatPlayer {
         //CREATE BUFFER SOURCE
         this.source = this.audioCtx.createBufferSource();
         this.source.loop = true;
-        this.source.start(0);
+        //this.source.start(0);
 
         //GainNode.gain -> VOLUME
         this.gainNode = this.audioCtx.createGain();
-
-
-        //VISUALISATION
-        //this.analyser = this.audioCtx.createAnalyser();
-        //this.analyser.fftSize = 256;
-        //this.bufferLength = this.analyser.frequencyBinCount;
-        //this.dataArray = new Uint8Array(this.bufferLength);
-        //this.analyser.getByteTimeDomainData(this.dataArray);
-        //this.c = document.getElementById("canvas");
-        //this.canvas = this.c.getContext("2d");
-        //this.canvas.clearRect(0, 0, 200, 100);
 
     }
 
@@ -33,6 +22,11 @@ export default class BackgroundBeatPlayer {
         }
         let promise = fetch(URL);
         promise.then(this.receiveResponse.bind(this));
+    }
+
+
+    startPlaying(){
+        this.source.start();
     }
 
     receiveResponse(response){
@@ -56,10 +50,6 @@ export default class BackgroundBeatPlayer {
     connectAllProperties(){
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.analyser);
-        //this.highpassfilter.connect(this.midfilter);
-        //this.midfilter.connect(this.lowpassfilter);
-        //this.lowpassfilter.connect(this.analyser);
-        //this.analyser.connect(this.audioCtx.destination);
     }
 
 }

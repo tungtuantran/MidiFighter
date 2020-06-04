@@ -4,9 +4,6 @@ import BackgroundBeatPlayer from '../audio/BackgroundBeat.js';
 
 
 class MusicButton extends Component {
-    state = {
-        soundName: ""
-    };
 
     buttonStyle = {
         maxwidth:250
@@ -19,7 +16,6 @@ class MusicButton extends Component {
 
     handlePlay(){
         this.props.onClickButton(this.props.id);
-        //console.log("heyhey"+this.props.id);
     }
 
 

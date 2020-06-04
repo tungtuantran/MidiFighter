@@ -5,7 +5,7 @@ import BackgroundBeatPlayer from '../audio/BackgroundBeat.js';
 class BackgroundBeat extends Component {
     state = {
         soundName: "",
-        playingButton: "Play"
+        isPlaying: false
     };
 
     buttonStyle = {
@@ -30,38 +30,38 @@ class BackgroundBeat extends Component {
         this.handlePlayBackground = this.handlePlayBackground.bind(this);
         this.handleChangeVolume = this.handleChangeVolume.bind(this);
         this.handleChangeSpeed = this.handleChangeSpeed.bind(this);
+        this.getNewPlayer = this.getNewPlayer.bind(this);
         this.soundToPlay = "";
     }
 
     handleSoundChoosen(choosenSound){
         this.soundToPlay=choosenSound;
-        if(this.player !== undefined){//if the user changes the beatAudio while it is already playing
+        if(this.state.isPlaying && this.player !== undefined){//if the user changes the beatAudio while it is already playing
             this.player.stopAndDisconnect();
-            this.player = new BackgroundBeatPlayer(process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav', this.props.audioCtx, this.props.analyserNode);
-            if(this.state.playingButton == "Play"){this.player.audioCtx.suspend();}
-            //applying values of the sliders
-            var input = document.getElementById("speedSlider").value;
-            this.player.source.playbackRate.value = input;
-            var input = document.getElementById("volumeSlider").value;
-            this.player.gainNode.gain.value = input;
+            this.getNewPlayer();
+            this.player.startPlaying();
         }
     }
+
+    getNewPlayer(){
+        this.player = new BackgroundBeatPlayer(process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav', this.props.audioCtx, this.props.analyserNode);
+        var input = document.getElementById("speedSlider").value;
+        this.player.source.playbackRate.value = input;
+        var input = document.getElementById("volumeSlider").value;
+        this.player.gainNode.gain.value = input;
+    }
+
     handlePlayBackground(){
-        if(this.player  === undefined){
-            if(this.state.playingButton == "Play" && this.soundToPlay!=""){
-                this.player = new BackgroundBeatPlayer(process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav', this.props.audioCtx, this.props.analyserNode);
-            }
-            if(this.soundToPlay == ""){return;}//nothing choosen - dont start playing anything
-        }
-        let newPlayingState = "";
-        if(this.state.playingButton == "Play"){
-            newPlayingState = "Stop";
-            this.player.audioCtx.resume();
+        if(this.soundToPlay == ""){return;}//nothing choosen - dont start playing anything
+
+        if(this.state.isPlaying == false){
+            this.getNewPlayer();
+            this.player.startPlaying();
+            this.setState({isPlaying: true});
         }else{
-            this.player.audioCtx.suspend();
-            newPlayingState = "Play";
+            this.player.stopAndDisconnect();
+            this.setState({isPlaying: false});
         }
-        this.setState({playingButton: newPlayingState});
     }
     handleChangeSpeed(){
         if(this.player === undefined){return;}
@@ -76,6 +76,9 @@ class BackgroundBeat extends Component {
     }
 
     render(){
+        let playButton = "Play";
+        if(this.state.isPlaying){playButton = "Stop";}
+
         return (<React.Fragment>
             <div class="shadow p-3 mb-5 bg-light rounded">
             <h4>BackgroundBeat</h4>
@@ -102,7 +105,7 @@ class BackgroundBeat extends Component {
             </form>
 
             <center>
-            <button  class="btn btn-dark p-1  "   onClick={this.handlePlayBackground}>{this.state.playingButton}</button>
+            <button  class="btn btn-dark p-1  "   onClick={this.handlePlayBackground}>{playButton}</button>
             </center>
             </div>
             </React.Fragment>);

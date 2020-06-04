@@ -27,20 +27,21 @@ class ButtonPad extends Component {
 
     handleMusicButtonClicked(musicButtonId){
         console.log("hey clicked "+musicButtonId);
-        
+
         let buttons = [...this.state.buttons];
-        
+
         if(this.props.mappingSound){
             buttons[musicButtonId-1].value = this.props.mappingSound;
             this.props.onMappingDone("");
 
-            this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
-            this.player.audioCtx.resume();
+            //this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
+            //this.player.audioCtx.resume();
             return;
         }
-        
-        this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
-        this.player.audioCtx.resume();
+        if(buttons[musicButtonId-1].value != "."){//play only if some sound was mapped to a button
+            this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
+            this.player.audioCtx.resume();
+        }
     }
 
 
@@ -51,7 +52,7 @@ class ButtonPad extends Component {
         this.handleMusicButtonClicked = this.handleMusicButtonClicked.bind(this);
     }
 
-    handleKeyPressed(e) {
+    handleKeyPressed(e) {//playing sounds with keyboard
         let buttonId = 0;
         if(e.code == 'KeyQ'){buttonId = 1;}
         if(e.code == 'KeyW'){buttonId = 2;}
