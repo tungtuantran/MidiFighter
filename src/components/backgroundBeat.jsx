@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import BackgroundBeatPlayer from '../audio/BackgroundBeat.js';
+import Octicon, { Mute, Unmute} from '@primer/octicons-react'
 
 class BackgroundBeat extends Component {
     state = {
@@ -76,8 +77,8 @@ class BackgroundBeat extends Component {
     }
 
     render(){
-        let playButton = "Play";
-        if(this.state.isPlaying){playButton = "Stop";}
+        let playButton = <Octicon icon={Unmute} />;
+        if(this.state.isPlaying){playButton = <Octicon icon={Mute} />;}
 
         return (<React.Fragment>
             <div class="shadow p-3 mb-5 bg-light rounded">
@@ -105,7 +106,12 @@ class BackgroundBeat extends Component {
             </form>
 
             <center>
-            <button  class="btn btn-dark p-1  "   onClick={this.handlePlayBackground}>{playButton}</button>
+            <button  class="btn btn-dark p-1   "   onClick={this.handlePlayBackground}>
+
+            {playButton}
+
+            </button>
+
             </center>
             </div>
             </React.Fragment>);
