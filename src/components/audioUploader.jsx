@@ -17,10 +17,9 @@ class AudioUploader extends Component {
                 if (file.type.match(/audio.*/)) {
                     let reader = new FileReader();
                     reader.onload = function(d) {
-                        debugger
                         properties.onAudioLoad(fileName, d.target.result);
                     };
-                    reader.readAsDataURL(file);
+                    reader.readAsArrayBuffer(file);                   //reader.readAsDataURL(file);
                 }
             });
         });
@@ -34,11 +33,11 @@ class AudioUploader extends Component {
     render() {
         return (<React.Fragment>
             <button className="btn btn-secondary" type="button" id="upload">
-                <img src={process.env.PUBLIC_URL + '/icons/upload.png'} width="20" height="20"/>
+            <img src={process.env.PUBLIC_URL + '/icons/upload.png'} width="20" height="20"/>
             </button>
 
             <input style={this.inputStyle} id="file-input" type="file" accept="audio/wav" name="file"/>
-        </React.Fragment>);
+            </React.Fragment>);
     }
 
 }

@@ -12,7 +12,9 @@ import { Spring } from "react-spring/renderprops";
 class Application extends Component {
     state = {
         soundToMap: "",
-        choosenTools: []
+        soundsList: ["808", "midtom", "cowbell", "snare", "bassC2", "sqrBass", "openhat", "kick"],
+        choosenTools: [],
+        uploadedAudio: []
     };
 
 
@@ -34,6 +36,8 @@ class Application extends Component {
 
         this.handleSoundMapping = this.handleSoundMapping.bind(this);
         this.handleToolDeleted = this.handleToolDeleted.bind(this);
+        this.handleAudioLoading = this.handleAudioLoading.bind(this);
+        this.getUploadedSound = this.getUploadedSound.bind(this);
         if (!window.AudioContext || window.webkitAudioContext) {
             alert("Web Audio API is not supported in this browser!")
             return;
@@ -41,6 +45,25 @@ class Application extends Component {
         this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         this.analyser = this.audioCtx.createAnalyser();
         this.analyser.connect(this.audioCtx.destination)
+    }
+    getUploadedSound(soundName){
+        var result = this.state.uploadedAudio.filter(obj => {
+            return obj.soundName === soundName
+        })
+        return result[0];
+    }
+
+    handleAudioLoading(fileName, audioContent){
+        if (!this.state.soundsList.includes(fileName)) {
+            this.setState({
+                soundsList: this.state.soundsList.concat([fileName])
+            });
+            this.setState({
+                uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
+            });
+        }
+        console.log(this.state.uploadedAudio)
+        alert('UPLOAD');
     }
 
     handleToolChoosen(toolName) {
@@ -105,7 +128,7 @@ class Application extends Component {
             <div class="row p-5"></div>
             <div class="row">
             <div class="col-sm-3">
-            <MapSound onMapping={this.handleSoundMapping} soundToMap={this.state.soundToMap}/>
+            <MapSound onUploadSound={this.handleAudioLoading} onMapping={this.handleSoundMapping} soundToMap={this.state.soundToMap} soundsList={this.state.soundsList}/>
             {bBeat}
             <center>
             <div class="dropdown " id="toolsDropdown">
@@ -123,7 +146,7 @@ class Application extends Component {
             </div>
             <div class="col-md-6">
             <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
-            mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}/>
+            mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping} getUploadedSound={this.getUploadedSound}/>
             </div>
             <div class="col-sm-3">
             <Visualizer analyserNode={this.analyser}/>

@@ -1,14 +1,28 @@
 export default class PadSound {
 
-    constructor(URL, audContext, analyser){
-        this.analyser = analyser;
-        this.setAudio(URL);
-        this.audioCtx = audContext;
+    constructor(params){
+        if(params.URL !== undefined){
+            this.analyser = params.analyser;
+            this.setAudio(params.URL);
+            this.audioCtx = params.audContext;
 
-        this.source = this.audioCtx.createBufferSource();
-        this.source.start(0);
+            this.source = this.audioCtx.createBufferSource();
+            this.source.start(0);
 
-        this.gainNode = this.audioCtx.createGain();
+            this.gainNode = this.audioCtx.createGain();
+        }else{//if playing uploaded audio
+            this.analyser = params.analyser;
+            this.audioCtx = params.audContext;
+            this.gainNode = this.audioCtx.createGain();
+            this.audioCtx.decodeAudioData(params.uploadedAudio.audio).then(function(buffer) {
+                this.source = this.audioCtx.createBufferSource();
+                this.source.start(0);
+
+                this.source.buffer = buffer;
+                this.connectAllProperties();
+
+            }.bind(this));
+        };
     }
 
     setAudio(URL){
