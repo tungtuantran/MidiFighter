@@ -1,8 +1,8 @@
 
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import $ from 'jquery';
 
-class Visualizer extends Component {
+class Visualizer extends PureComponent {
 
 
     constructor(){
@@ -10,9 +10,6 @@ class Visualizer extends Component {
         this.draw = this.draw.bind(this);
     }
 
-    //handleSoundChoosen(choosenSound){
-    //this.props.onMapping(choosenSound);
-    //}
 
 
     draw() {
@@ -49,7 +46,6 @@ class Visualizer extends Component {
     }
 
     render(){
-        console.log("rendering map!");
         let dropdownText = "Choose Sound";
         if(this.props.soundToMap){ dropdownText = this.props.soundToMap}
         return (<React.Fragment>

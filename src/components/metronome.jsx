@@ -1,10 +1,11 @@
 
-import React, {Component} from 'react';
+import React, {PureComponent, Component} from 'react';
 
 import { Spring, useSpring, animated } from '@react-spring/web'
 //import {Spring} from 'react-spring/renderprops'
+import Octicon, {Dash} from '@primer/octicons-react'
 
-class Metronome extends Component {
+class Metronome extends PureComponent {
 
     state = {
         bpm: 40
@@ -42,42 +43,23 @@ class Metronome extends Component {
         this.setState({bpm: input});
     }
 
-    render1(){
-        let tension = 20/(150/60);
-        return (<React.Fragment>
-            <div class="shadow p-3 mt-2 bg-light rounded">
-            <h4>Metronome</h4>
+    //preventing render() if the state was not changed
+    //shouldComponentUpdate(nextProps, nextState) {
 
-            <center>
-            <div style={this.boxStyle}>
-            <Spring
-            config={{tension: 20, friction: 0, precision: 0.1}}
-            from={{ opacity: 1,
-                    transform: 'translate3d(0,35px,0) scale(1) rotateZ(340deg)'
-            }}
-            to={{ opacity: 1,
-                    transform: 'translate3d(0px,35px,0) scale(1) rotateZ(360deg)'
-            }}>
-            {props => <div style={props}><div style={this.clockHandStyle}></div></div>}
-            </Spring>
-            </div>
-            </center>
-            <form>
-            <div class="form-group">
-            <input type="range" class="form-control-range"  id="bpmSlider" min="40" max="218" step="1" defaultValue="40" onClick={this.handleChangeBpm}></input>
-            <span id="bpmText">{this.state.bpm}bpm</span>
-            </div>
-            </form>
-
-            </div>
-            </React.Fragment>);
-
-    }
+    //}
 
     render(){
+
+        const hStyle = {
+            display: "inline"
+        };
+        const toolName = "Metronome";
+        console.log("render metronome");
         return (<React.Fragment>
             <div class="shadow p-3 mt-2 bg-light rounded">
-            <h4>Metronome</h4>
+            <h4 style={hStyle}>Metronome</h4>
+            <button  class=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("Metronome")}><Octicon icon={Dash}/></button>
+
             <center>
             <div style={this.boxStyle}>
             <App bpm={this.state.bpm} />
@@ -85,8 +67,8 @@ class Metronome extends Component {
             </center>
             <form>
             <div class="form-group">
-            <input type="range" class="form-control-range"  id="bpmSlider" min="40" max="218" step="1" defaultValue="40" onClick={this.handleChangeBpm}></input>
             <span id="bpmText">{this.state.bpm}bpm</span>
+            <input type="range" class="form-control-range mt-2"  id="bpmSlider" min="40" max="218" step="1" defaultValue="40" onClick={this.handleChangeBpm}></input>
             </div>
             </form>
 
@@ -112,8 +94,7 @@ const clockHandStyleN = {
 function App(args) {
     let dur = (60 / args.bpm)*1000;
     dur = parseFloat(dur.toFixed(2));
-    console.log(dur);
-    const props = useSpring({ config:{duration: dur}, from: {opacity: 1, transform: 'translate3d(0,35px,0) scale(1) rotateZ(340deg)'}, to: {transform: 'translate3d(0px,35px,0) scale(1) rotateZ(380deg)', opacity: 1}, loop: { reverse: true }})
+    const props = useSpring({ config:{duration: dur, precision: 0}, from: { transform: 'translate3d(0,35px,0)  rotateZ(340deg)'}, to: {transform: 'translate3d(0px,35px,0)  rotateZ(380deg)'}, loop: { reverse: true }})
 
     return <animated.div style={props}><div style={clockHandStyleN}></div></animated.div>
 }

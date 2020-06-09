@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import $ from 'jquery';
 import BackgroundBeatPlayer from '../audio/BackgroundBeat.js';
-import Octicon, { Mute, Unmute} from '@primer/octicons-react'
+import Octicon, { Mute, Unmute, Dash} from '@primer/octicons-react'
 
-class BackgroundBeat extends Component {
+class BackgroundBeat extends PureComponent {
     state = {
         soundName: "",
         isPlaying: false
@@ -77,21 +77,30 @@ class BackgroundBeat extends Component {
     }
 
     render(){
+
+        const hStyle = {
+            display: "inline"
+        };
+
         let playButton = <Octicon icon={Unmute} />;
         if(this.state.isPlaying){playButton = <Octicon icon={Mute} />;}
 
         return (<React.Fragment>
             <div class="shadow p-3 mb-5 bg-light rounded">
-            <h4>BackgroundBeat</h4>
+            <h4 style={hStyle}>BackgroundBeat</h4>
+            <button  class=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("BackgroundBeat")}><Octicon icon={Dash}/></button>
 
             <div class="dropdown p-1" id="soundDropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Choose Sound
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" id="alertMe" href="#">BoomChuck</a>
+            <a class="dropdown-item" href="#">BoomChuck</a>
             <a class="dropdown-item" href="#">BasicRock</a>
-            <a class="dropdown-item" href="#">LandOfBits</a>
+            <a class="dropdown-item" href="#">Kick</a>
+            <a class="dropdown-item" href="#">OverdriveBass</a>
+            <a class="dropdown-item" href="#">SidechainedPluck</a>
+            <a class="dropdown-item" href="#">FutureBassSaw</a>
             </div>
             </div>
 
