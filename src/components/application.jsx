@@ -1,6 +1,8 @@
 import ButtonPad from './buttonPad';
 import Visualizer from './visualizer.jsx';
 import BackgroundBeat from './backgroundBeat';
+import UploadingTool from './uploadingTool';
+import RecordingTool from './recordingTool';
 import MapSound from './mapSound';
 import Metronome from './metronome';
 import React, {Component} from 'react';
@@ -106,6 +108,24 @@ class Application extends Component {
         console.log("rendering!");
         let bBeat = null;
         let metronome = null;
+        let uTool = null;
+        let rTool = null;
+        if (this.state.choosenTools.includes("RecordingTool")) {
+            rTool = <Spring
+            config={{duration: 400}}
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}>
+                {props => <div style={props}><RecordingTool onToolDelete={this.handleToolDeleted} /></div>}
+                </Spring>;
+        }
+        if (this.state.choosenTools.includes("UploadingTool")) {
+            uTool = <Spring
+            config={{duration: 400}}
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}>
+                {props => <div style={props}><UploadingTool onUploadSound={this.handleAudioLoading} onToolDelete={this.handleToolDeleted} /></div>}
+                </Spring>;
+        }
         if (this.state.choosenTools.includes("BackgroundBeat")) {
             bBeat = <Spring
             config={{duration: 400}}
@@ -130,6 +150,7 @@ class Application extends Component {
             <div class="col-sm-3">
             <MapSound onUploadSound={this.handleAudioLoading} onMapping={this.handleSoundMapping} soundToMap={this.state.soundToMap} soundsList={this.state.soundsList}/>
             {bBeat}
+            {uTool}
             <center>
             <div class="dropdown " id="toolsDropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -137,6 +158,8 @@ class Application extends Component {
             <Octicon icon={Plus}/> Add Tool
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">RecordingTool</a>
+            <a class="dropdown-item" href="#">UploadingTool</a>
             <a class="dropdown-item" href="#">BackgroundBeat</a>
             <a class="dropdown-item" href="#">Metronome</a>
             </div>
@@ -151,6 +174,7 @@ class Application extends Component {
             <div class="col-sm-3">
             <Visualizer analyserNode={this.analyser}/>
             {metronome}
+            {rTool}
             </div>
             </div>
             </div>
