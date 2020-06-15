@@ -1,6 +1,6 @@
 export default class BackgroundBeatPlayer {
 
-    constructor(URL, audContext, analyser){
+    constructor(URL, audContext, analyser, streamDestination){
         this.analyser = analyser;
         this.setAudio(URL);
         this.audioCtx = audContext;
@@ -13,6 +13,8 @@ export default class BackgroundBeatPlayer {
         //GainNode.gain -> VOLUME
         this.gainNode = this.audioCtx.createGain();
 
+        // provide input for optional recording
+        this.source.connect(this.gainNode).connect(streamDestination);
     }
 
     setAudio(URL){

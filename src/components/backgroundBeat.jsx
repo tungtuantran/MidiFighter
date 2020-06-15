@@ -45,7 +45,7 @@ class BackgroundBeat extends PureComponent {
     }
 
     getNewPlayer(){
-        this.player = new BackgroundBeatPlayer(process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav', this.props.audioCtx, this.props.analyserNode);
+        this.player = new BackgroundBeatPlayer(process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav', this.props.audioCtx, this.props.analyserNode, this.props.streamDestination);
         var input = document.getElementById("speedSlider").value;
         this.player.source.playbackRate.value = input;
         var input = document.getElementById("volumeSlider").value;
