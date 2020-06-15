@@ -118,9 +118,10 @@ class Application extends Component {
                 config={{duration: 400}}
                 from={{opacity: 0}}
                 to={{opacity: 1}}>
-                {props => <div style={props}><RecordingTool streamDestination={this.destination}
-                                                            audioContext={this.audioCtx}
-                                                            onToolDelete={this.handleToolDeleted}/></div>}
+                {props => <div style={props}>
+                    <RecordingTool streamDestination={this.destination}
+                                   onToolDelete={this.handleToolDeleted}/>
+                </div>}
             </Spring>;
         }
         if (this.state.choosenTools.includes("UploadingTool")) {
@@ -128,8 +129,9 @@ class Application extends Component {
                 config={{duration: 400}}
                 from={{opacity: 0}}
                 to={{opacity: 1}}>
-                {props => <div style={props}><UploadingTool onUploadSound={this.handleAudioLoading}
-                                                            onToolDelete={this.handleToolDeleted}/></div>}
+                {props => <div style={props}>
+                    <UploadingTool onUploadSound={this.handleAudioLoading}
+                                   onToolDelete={this.handleToolDeleted}/></div>}
             </Spring>;
         }
         if (this.state.choosenTools.includes("BackgroundBeat")) {
@@ -148,7 +150,8 @@ class Application extends Component {
                 config={{duration: 400}}
                 from={{opacity: 0}}
                 to={{opacity: 1}}>
-                {props => <div style={props}><Metronome onToolDelete={this.handleToolDeleted}/></div>}
+                {props => <div style={props}><Metronome onToolDelete={this.handleToolDeleted}/>
+                </div>}
             </Spring>;
         }
         //CREATE AUDIO CONTEXT
