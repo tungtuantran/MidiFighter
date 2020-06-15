@@ -38,7 +38,7 @@ class MapSound extends Component {
             dropdownText = this.props.soundToMap;
         }
         const soundList = this.props.soundsList.map((soundName) =>
-            <a class="dropdown-item" href="#">{soundName}</a>
+            <a class="dropdown-item" key={soundName} href="#">{soundName}</a>
         );
         return (<React.Fragment>
             <div class="shadow p-3 mb-5 bg-light rounded">
@@ -52,7 +52,6 @@ class MapSound extends Component {
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {soundList}
             </div>
-            <AudioUploader onAudioLoad={this.props.onUploadSound} ></AudioUploader>
             </div>
 
             </div>
