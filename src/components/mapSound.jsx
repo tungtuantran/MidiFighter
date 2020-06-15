@@ -52,7 +52,6 @@ class MapSound extends Component {
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {soundList}
             </div>
-            <AudioUploader onAudioLoad={this.props.onUploadSound} ></AudioUploader>
             </div>
 
             </div>
