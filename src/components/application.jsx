@@ -155,7 +155,13 @@ class Application extends Component {
                 from={{opacity: 0}}
                 to={{opacity: 1}}>
                 {props => <div style={props}>
-                    <UploadingTool onUploadSound={this.handleAudioLoading}
+                    <UploadingTool streamDestination={this.destination}
+                                    audioCtx={this.audioCtx}
+                                    analyserNode={this.analyser}
+                                    setTypeOfAudio={this.setTypeOfAudio}
+                                    onUploadSound={this.handleAudioLoading}
+                                    soundsList={this.state.soundsList}
+                                    beatsList={this.state.beatsList}
                                    onToolDelete={this.handleToolDeleted}/></div>}
             </Spring>;
         }
@@ -167,7 +173,8 @@ class Application extends Component {
                 {props => <div style={props}><BackgroundBeat audioCtx={this.audioCtx}
                                                              streamDestination={this.destination}
                                                              onToolDelete={this.handleToolDeleted}
-                                                             analyserNode={this.analyser}/></div>}
+                                                             analyserNode={this.analyser}
+                                                             beatsList= {this.state.beatsList}/></div>}
             </Spring>;
         }
         if (this.state.choosenTools.includes("Metronome")) {
