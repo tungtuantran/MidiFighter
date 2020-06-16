@@ -203,6 +203,18 @@ class Application extends Component {
                                 </div>
                             </div>
                         </center>
+                    </div>
+                    <div class="col-md-6">
+                        <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
+                                   mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}
+                                   getUploadedSound={this.getUploadedSound} streamDestination={this.destination}/>
+                    </div>
+                    <div class="col-sm-3">
+                        <Visualizer analyserNode={this.analyser}/>
+                        {metronome}
+                        {rTool}
+                    </div>
+                </div>
 
             </div>
         </React.Fragment>);
