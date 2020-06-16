@@ -91,7 +91,7 @@ class Application extends Component {
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
             }
-            alert('UPLOAD');
+            alert('UPLOAD BEAT');
         }
         console.log(this.state.uploadedAudio)
     }
@@ -174,6 +174,7 @@ class Application extends Component {
                     streamDestination={this.destination}
                     onToolDelete={this.handleToolDeleted}
                     analyserNode={this.analyser}
+                    getUploadedSound={this.getUploadedSound}
                     beatsList= {this.state.beatsList}/></div>}
                 </Spring>;
         }

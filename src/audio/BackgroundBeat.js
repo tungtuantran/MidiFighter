@@ -1,20 +1,41 @@
 export default class BackgroundBeatPlayer {
 
-    constructor(URL, audContext, analyser, streamDestination){
-        this.analyser = analyser;
-        this.setAudio(URL);
-        this.audioCtx = audContext;
+    //constructor(URL, audContext, analyser, streamDestination){
+    constructor(params){
+        if(params.URL !== undefined){
+            this.speed = params.speed;
+            this.volume = params.volume;
+            this.analyser = params.analyser;
+            this.setAudio(params.URL);
+            this.audioCtx = params.audContext;
 
-        //CREATE BUFFER SOURCE
-        this.source = this.audioCtx.createBufferSource();
-        this.source.loop = true;
-        //this.source.start(0);
+            //CREATE BUFFER SOURCE
+            this.source = this.audioCtx.createBufferSource();
+            this.source.loop = true;
+            //this.source.start(0);
 
-        //GainNode.gain -> VOLUME
-        this.gainNode = this.audioCtx.createGain();
+            //GainNode.gain -> VOLUME
+            this.gainNode = this.audioCtx.createGain();
 
-        // provide input for optional recording
-        this.source.connect(this.gainNode).connect(streamDestination);
+            // provide input for optional recording
+            //this.source.connect(this.gainNode).connect(params.destination);
+        }else{
+            this.analyser = params.analyser;
+            this.audioCtx = params.audContext;
+            this.destination = params.destination;
+            this.gainNode = this.audioCtx.createGain();
+            this.speed = params.speed;
+            this.volume = params.volume;
+            console.log(params.uploadedAudio);
+            this.audioCtx.decodeAudioData(params.uploadedAudio.audio).then(function (buffer) {
+                console.log(this);
+                this.source = this.audioCtx.createBufferSource();
+                this.source.loop = true;
+
+                this.source.buffer = buffer;
+                this.connectAllProperties();
+            }.bind(this));
+        }
     }
 
     setAudio(URL){
@@ -28,6 +49,8 @@ export default class BackgroundBeatPlayer {
 
 
     startPlaying(){
+        this.source.playbackRate.value = this.speed;
+        this.gainNode.gain.value = this.volume;
         this.source.start();
     }
 
@@ -41,7 +64,7 @@ export default class BackgroundBeatPlayer {
 
     stopAndDisconnect(){//for the case that a new sound was choosen
         this.source.stop();
-        this.gainNode.disconnect(this.analyser);
+        //this.gainNode.disconnect(this.analyser);
     }
 
     setBuffer(buffer){
@@ -52,6 +75,7 @@ export default class BackgroundBeatPlayer {
     connectAllProperties(){
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.analyser);
+        this.startPlaying();
     }
 
 }
