@@ -4,6 +4,11 @@ import Octicon, {Dash} from '@primer/octicons-react'
 
 class RecordingTool extends Component {
 
+    state = {
+        isRecording: false,
+        audioPlayerVisibility: "none"
+    }
+
     constructor(props) {
         super(props);
 
@@ -33,14 +38,15 @@ class RecordingTool extends Component {
     }
 
     handleButtonClicked = function () {
-        $('#recordButton').text(!this.started ? "Stop" : "Start");
-        this.started = !this.started;
-        if (this.started) {
+        let isRecordingState = !this.state.isRecording;
+        this.setState({ isRecording: isRecordingState });
+
+        if (isRecordingState) {
             this.mediaRecorder.start();
-            $('#audio').css("display", "none");
+            this.setState({ audioPlayerVisibility: "none" });
         } else {
             this.mediaRecorder.stop();
-            $('#audio').css("display", "inline");
+            this.setState({ audioPlayerVisibility: "inline" });
         }
     }
 
@@ -48,20 +54,34 @@ class RecordingTool extends Component {
         const hStyle = {
             display: "inline"
         };
+        let recordButton = null;
+        let downloadVisibility = "invisible";//the download button is only visible if the recording is done
+        if(this.state.isRecording){
+            recordButton = <button className="btn btn-dark mb-2" type="button" id="recordButton"
+            onClick={this.handleButtonClicked}>Stop
+                </button>;
+        }else{
+            recordButton = <button className="btn btn-danger mb-2" type="button" id="recordButton"
+            onClick={this.handleButtonClicked}>Start
+                </button>;
+            if(this.state.audioPlayerVisibility == "inline"){//if audio player visible
+                downloadVisibility = "visible";
+            }
+        }
+
         return (<React.Fragment>
             <div class="shadow p-3 mt-2 mb-5 bg-light rounded">
-                <h4 style={hStyle}>RecordingTool</h4>
-                <button class=" btn btn-light ml-1 mb-2" onClick={() => this.props.onToolDelete("RecordingTool")}>
-                    <Octicon icon={Dash}/></button>
-                <button className="btn btn-secondary mb-2" type="button" id="recordButton"
-                        onClick={this.handleButtonClicked}>Start
-                </button>
-                <a id="downloadLink">
-                    <button className="btn btn-secondary mb-2" type="button">Download</button>
-                </a>
-                <audio controls id="audio" style={{display: "none"}}></audio>
+            <h4 style={hStyle}>RecordingTool</h4>
+            <button class=" btn btn-light ml-1 mb-2" onClick={() => this.props.onToolDelete("RecordingTool")}>
+            <Octicon icon={Dash}/></button>
+            <br></br>
+            {recordButton}
+            <a id="downloadLink" className={downloadVisibility}>
+            <button className="btn btn-secondary ml-2 mb-2" type="button">Download</button>
+            </a>
+            <audio controls id="audio" style={{display: this.state.audioPlayerVisibility}}></audio>
             </div>
-        </React.Fragment>);
+            </React.Fragment>);
     }
 
 }

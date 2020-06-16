@@ -115,84 +115,84 @@ class Application extends Component {
         let rTool = null;
         if (this.state.choosenTools.includes("RecordingTool")) {
             rTool = <Spring
-                config={{duration: 400}}
-                from={{opacity: 0}}
-                to={{opacity: 1}}>
+            config={{duration: 400}}
+            from={{opacity: 0}}
+            to={{opacity: 1}}>
                 {props => <div style={props}>
                     <RecordingTool streamDestination={this.destination}
-                                   onToolDelete={this.handleToolDeleted}/>
-                </div>}
-            </Spring>;
+                    onToolDelete={this.handleToolDeleted}/>
+                    </div>}
+                </Spring>;
         }
         if (this.state.choosenTools.includes("UploadingTool")) {
             uTool = <Spring
-                config={{duration: 400}}
-                from={{opacity: 0}}
-                to={{opacity: 1}}>
+            config={{duration: 400}}
+            from={{opacity: 0}}
+            to={{opacity: 1}}>
                 {props => <div style={props}>
                     <UploadingTool onUploadSound={this.handleAudioLoading}
-                                   onToolDelete={this.handleToolDeleted}/></div>}
-            </Spring>;
+                    onToolDelete={this.handleToolDeleted}/></div>}
+                </Spring>;
         }
         if (this.state.choosenTools.includes("BackgroundBeat")) {
             bBeat = <Spring
-                config={{duration: 400}}
-                from={{opacity: 0}}
-                to={{opacity: 1}}>
+            config={{duration: 400}}
+            from={{opacity: 0}}
+            to={{opacity: 1}}>
                 {props => <div style={props}><BackgroundBeat audioCtx={this.audioCtx}
-                                                             streamDestination={this.destination}
-                                                             onToolDelete={this.handleToolDeleted}
-                                                             analyserNode={this.analyser}/></div>}
-            </Spring>;
+                    streamDestination={this.destination}
+                    onToolDelete={this.handleToolDeleted}
+                    analyserNode={this.analyser}/></div>}
+                </Spring>;
         }
         if (this.state.choosenTools.includes("Metronome")) {
             metronome = <Spring
-                config={{duration: 400}}
-                from={{opacity: 0}}
-                to={{opacity: 1}}>
+            config={{duration: 400}}
+            from={{opacity: 0}}
+            to={{opacity: 1}}>
                 {props => <div style={props}><Metronome onToolDelete={this.handleToolDeleted}/>
-                </div>}
-            </Spring>;
+                    </div>}
+                </Spring>;
         }
         //CREATE AUDIO CONTEXT
         return (<React.Fragment>
             <div class="container">
-                <div class="row p-5"></div>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <MapSound onUploadSound={this.handleAudioLoading} onMapping={this.handleSoundMapping}
-                                  soundToMap={this.state.soundToMap} soundsList={this.state.soundsList}/>
-                        {bBeat}
-                        {uTool}
-                        <center>
-                            <div class="dropdown " id="toolsDropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <Octicon icon={Plus}/> Add Tool
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">RecordingTool</a>
-                                    <a class="dropdown-item" href="#">UploadingTool</a>
-                                    <a class="dropdown-item" href="#">BackgroundBeat</a>
-                                    <a class="dropdown-item" href="#">Metronome</a>
-                                </div>
-                            </div>
-                        </center>
-
-                    </div>
-                    <div class="col-md-6">
-                        <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
-                                   mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}
-                                   getUploadedSound={this.getUploadedSound} streamDestination={this.destination}/>
-                    </div>
-                    <div class="col-sm-3">
-                        <Visualizer analyserNode={this.analyser}/>
-                        {metronome}
-                        {rTool}
-                    </div>
-                </div>
+            <div class="row p-5"></div>
+            <div class="row">
+            <div class="col-sm-3">
+            <MapSound onUploadSound={this.handleAudioLoading} onMapping={this.handleSoundMapping}
+            soundToMap={this.state.soundToMap} soundsList={this.state.soundsList}/>
+            {bBeat}
+            {uTool}
+            <center>
+            <div class="dropdown " id="toolsDropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <Octicon icon={Plus}/> Add Tool
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">RecordingTool</a>
+            <a class="dropdown-item" href="#">UploadingTool</a>
+            <a class="dropdown-item" href="#">BackgroundBeat</a>
+            <a class="dropdown-item" href="#">Metronome</a>
             </div>
-        </React.Fragment>);
+            </div>
+            </center>
+
+            </div>
+            <div class="col-md-6">
+            <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
+            mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}
+            getUploadedSound={this.getUploadedSound} streamDestination={this.destination}/>
+            {rTool}
+            </div>
+            <div class="col-sm-3">
+            <Visualizer analyserNode={this.analyser}/>
+            {metronome}
+            </div>
+            </div>
+            </div>
+            </React.Fragment>);
     }
 
 }
