@@ -79,6 +79,7 @@ class RecordingTool extends Component {
             <a id="downloadLink" className={downloadVisibility}>
             <button className="btn btn-secondary ml-2 mb-2" type="button">Download</button>
             </a>
+            <br></br>
             <audio controls id="audio" style={{display: this.state.audioPlayerVisibility}}></audio>
             </div>
             </React.Fragment>);
