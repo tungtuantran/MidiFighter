@@ -10,9 +10,11 @@ class MapSound extends Component {
         this.handleSoundChoosen = this.handleSoundChoosen.bind(this);
     }
 
+    
     handleSoundChoosen(choosenSound) {
         console.log(choosenSound);
         this.props.onMapping(choosenSound);
+
     }
 
 
@@ -52,6 +54,7 @@ class MapSound extends Component {
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {soundList}
             </div>
+
             </div>
 
             </div>

@@ -1,3 +1,4 @@
+
 import React, {PureComponent} from 'react';
 import $ from 'jquery';
 import BackgroundBeatPlayer from '../audio/BackgroundBeat.js';
@@ -20,9 +21,10 @@ class BackgroundBeat extends PureComponent {
             $('.dropdown').each(function (key, dropdown) {
                 var $dropdown = $(dropdown);
                 $dropdown.find('.dropdown-menu a').on('click', function () {
-                    if($dropdown[0].id == "soundDropdown"){
-                        c.handleSoundChoosen($dropdown.find('button').text($(this).text())[0].innerText);
-                        $dropdown.find('button').text($(this).text()).append(' <span class="caret"></span>');
+                    if($dropdown[0].id == "beatDropdown"){
+                        console.log("asdasd " + $dropdown.find('#dropdownMenuButton').text($(this).text())[0].innerText);
+                        c.handleSoundChoosen($dropdown.find('#dropdownMenuButton').text($(this).text())[0].innerText);
+                        $dropdown.find('#dropdownMenuButton').text($(this).text()).append(' <span class="caret"></span>');
                     }
                 });
             });
@@ -37,6 +39,7 @@ class BackgroundBeat extends PureComponent {
 
     handleSoundChoosen(choosenSound){
         this.soundToPlay=choosenSound;
+
         if(this.state.isPlaying && this.player !== undefined){//if the user changes the beatAudio while it is already playing
             this.player.stopAndDisconnect();
             this.getNewPlayer();
@@ -85,25 +88,36 @@ class BackgroundBeat extends PureComponent {
         let playButton = <Octicon icon={Unmute} />;
         if(this.state.isPlaying){playButton = <Octicon icon={Mute} />;}
 
+
+                
+        let dropdownText = "Choose Beat";
+        
+        /*
+        if (this.props.soundToMap) {
+            dropdownText = this.props.soundToMap;
+        }
+        */
+        
+        const beatList = this.props.beatsList.map((beatName) =>
+            <a class="dropdown-item" key={beatName} href="#">{beatName}</a>
+        );
+        
         return (<React.Fragment>
             <div class="shadow p-3 mb-5 bg-light rounded">
             <h4 style={hStyle}>BackgroundBeat</h4>
             <button  class=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("BackgroundBeat")}><Octicon icon={Dash}/></button>
 
-            <div class="dropdown p-1" id="soundDropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Choose Sound
+            <div class="dropdown p-1" id="beatDropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {dropdownText}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">BoomChuck</a>
-            <a class="dropdown-item" href="#">BasicRock</a>
-            <a class="dropdown-item" href="#">Kick</a>
-            <a class="dropdown-item" href="#">OverdriveBass</a>
-            <a class="dropdown-item" href="#">SidechainedPluck</a>
-            <a class="dropdown-item" href="#">FutureBassSaw</a>
-            </div>
+            {beatList}
+
             </div>
 
+            </div>
 
             <form>
             <div class="form-group">
