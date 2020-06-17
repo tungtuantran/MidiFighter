@@ -34,18 +34,26 @@ class BackgroundBeat extends PureComponent {
 
     getNewPlayer(){
         console.log(this.soundToPlay);
-        var speedPlayer = document.getElementById("speedSlider").value;
-        var volumePlayer = document.getElementById("volumeSlider").value;
+
+        var speedPlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).speed;
+        var volumePlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).volume;
+
+        //var speedPlayer = document.getElementById("speedSlider").value;
+        //var volumePlayer = document.getElementById("volumeSlider").value;
+
+
         var uploadedSound = this.props.getUploadedSound(this.soundToPlay);
         if(uploadedSound != undefined){//if some uploaded sound should be played
             const copy = Object.assign({}, uploadedSound);
             var dst = new ArrayBuffer(uploadedSound.audio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(uploadedSound.audio));
             copy.audio = dst;
-            this.player = new BackgroundBeatPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer} );
+            this.player = new BackgroundBeatPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer} ); 
+
             return;
         }
-        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer} );
+        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer} );  
+
     }
 
     handlePlayBackground(){
@@ -64,11 +72,15 @@ class BackgroundBeat extends PureComponent {
         var input = document.getElementById("speedSlider").value;
         if(input == 0){input=0.1;}//it cannot be 0 because then it will start playing with the normal speed
         this.player.source.playbackRate.value = input;
+        console.log(input);
+
     }
     handleChangeVolume(){
         if(this.player === undefined){return;}
         var input = document.getElementById("volumeSlider").value;
         this.player.gainNode.gain.value = input;
+
+
     }
 
     render(){
@@ -79,7 +91,6 @@ class BackgroundBeat extends PureComponent {
                 var $dropdown = $(dropdown);
                 $dropdown.find('.dropdown-menu a').on('click', function () {
                     if($dropdown[0].id == "beatDropdown"){
-                        console.log("asdasd " + $dropdown.find('#dropdownMenuButton').text($(this).text())[0].innerText);
                         c.handleSoundChoosen($dropdown.find('#dropdownMenuButton').text($(this).text())[0].innerText);
                         $dropdown.find('#dropdownMenuButton').text($(this).text()).append(' <span class="caret"></span>');
                     }
@@ -104,7 +115,7 @@ class BackgroundBeat extends PureComponent {
         */
 
         const beatList = this.props.beatsList.map((beatName) =>
-            <a class="dropdown-item" key={beatName+"beat"} href="#">{beatName}</a>
+            <a class="dropdown-item" key={beatName.name+"beat"} href="#">{beatName.name}</a>
         );
 
         return (<React.Fragment>

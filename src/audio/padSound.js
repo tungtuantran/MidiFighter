@@ -2,6 +2,9 @@ export default class PadSound {
 
     constructor(params) {
         if (params.URL !== undefined) {
+            this.speed = params.speed;
+            this.volume = params.volume;
+
             this.analyser = params.analyser;
             this.setAudio(params.URL);
             this.audioCtx = params.audContext;
@@ -14,12 +17,21 @@ export default class PadSound {
             this.gainNode = this.audioCtx.createGain();
 
         } else {//if playing uploaded audio
+            
             this.analyser = params.analyser;
             this.audioCtx = params.audContext;
             this.destination = params.destination;
             this.gainNode = this.audioCtx.createGain();
+
+            this.speed = params.speed;
+            this.volume = params.volume;
+
             this.audioCtx.decodeAudioData(params.uploadedAudio.audio).then(function (buffer) {
                 this.source = this.audioCtx.createBufferSource();
+
+                this.source.playbackRate.value = this.speed;
+                this.gainNode.gain.value = this.volume;
+                
                 this.source.start(0);
 
                 this.source.buffer = buffer;

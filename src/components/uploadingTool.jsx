@@ -18,12 +18,12 @@ class UploadingTool extends Component {
         };
 
         return (<React.Fragment>
-            
+
             <div class="shadow p-3 mb-5 bg-light rounded">
             <h4 style={hStyle}>UploadingTool</h4>
             <button  class="btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("UploadingTool")}><Octicon icon={Dash}/></button>          
 
-            <AudioUploader onAudioLoad={this.props.onUploadSound} setTypeOfAudio={this.props.setTypeOfAudio}></AudioUploader>
+            <AudioUploader onAudioLoad={this.props.onUploadSound} setTypeOfAudio={this.props.setTypeOfAudio} ></AudioUploader>
 
             </div>
 

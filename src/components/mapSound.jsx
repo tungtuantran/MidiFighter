@@ -39,8 +39,8 @@ class MapSound extends Component {
         if (this.props.soundToMap) {
             dropdownText = this.props.soundToMap;
         }
-        const soundList = this.props.soundsList.map((soundName) =>
-            <a class="dropdown-item" key={soundName} href="#">{soundName}</a>
+        const soundList = this.props.soundsList.map(soundName =>
+            <a class="dropdown-item" key={soundName.name} href="#">{soundName.name}</a>
         );
         return (<React.Fragment>
             <div class="shadow p-3 mb-5 bg-light rounded">

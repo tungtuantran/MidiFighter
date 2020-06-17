@@ -5,9 +5,11 @@ export default class BackgroundBeatPlayer {
         if(params.URL !== undefined){
             this.speed = params.speed;
             this.volume = params.volume;
+
             this.analyser = params.analyser;
             this.setAudio(params.URL);
             this.audioCtx = params.audContext;
+
 
             //CREATE BUFFER SOURCE
             this.source = this.audioCtx.createBufferSource();
@@ -19,14 +21,19 @@ export default class BackgroundBeatPlayer {
 
             // provide input for optional recording
             //this.source.connect(this.gainNode).connect(params.destination);
+
+
         }else{
             this.analyser = params.analyser;
             this.audioCtx = params.audContext;
             this.destination = params.destination;
             this.gainNode = this.audioCtx.createGain();
+
+
             this.speed = params.speed;
             this.volume = params.volume;
             console.log(params.uploadedAudio);
+
             this.audioCtx.decodeAudioData(params.uploadedAudio.audio).then(function (buffer) {
                 console.log(this);
                 this.source = this.audioCtx.createBufferSource();
@@ -73,8 +80,10 @@ export default class BackgroundBeatPlayer {
     }
 
     connectAllProperties(){
+        
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.analyser);
+
         this.startPlaying();
     }
 

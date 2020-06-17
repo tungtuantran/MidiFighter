@@ -15,8 +15,71 @@ class Application extends Component {
     state = {
         typeOfAudio: "",
         soundToMap: "",
-        soundsList: ["808", "midtom", "cowbell", "snare", "bassC2", "sqrBass", "openhat", "kick"],
-        beatsList: ["BoomChuck", "BasicRock", "Kick", "OverdriveBass", "SidechainedPluck", "FutureBassSaw"],
+        soundsList: [{ 
+                        name: '808',
+                        speed: 1,
+                        volume: 1
+                    },
+                    { 
+                        name: 'midtom',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'snare',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'bassC2',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'sqrBass',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'openhat',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'kick',
+                        speed: 1,
+                        volume: 1
+                    }], 
+        beatsList: [{ 
+                        name: 'BoomChuck',
+                        speed: 1,
+                        volume: 1
+                    },
+                    { 
+                        name: 'BasicRock',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'Kick',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'OverdriveBass',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'SidechainedPluck',
+                        speed: 1,
+                        volume: 1
+                    }, 
+                    { 
+                        name: 'FutureBassSaw',
+                        speed: 1,
+                        volume: 1
+                    }], 
         choosenTools: [],
         uploadedAudio: []
     };
@@ -70,11 +133,15 @@ class Application extends Component {
         return result[0];
     }
 
-    handleAudioLoading(fileName, audioContent){
+    handleAudioLoading(fileName, audioContent, volume, speed){
         if(this.state.typeOfAudio == "Sound"){
             if (!this.state.soundsList.includes(fileName)) {
                 this.setState({
-                    soundsList: this.state.soundsList.concat([fileName])
+                    soundsList: this.state.soundsList.concat([{ 
+                                                                name: fileName,
+                                                                speed: speed,                   //edit speed and volume
+                                                                volume: volume
+                                                             }])                         
                 });
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
@@ -85,7 +152,11 @@ class Application extends Component {
         if(this.state.typeOfAudio == "Beat"){
             if (!this.state.beatsList.includes(fileName)) {
                 this.setState({
-                    beatsList: this.state.beatsList.concat([fileName])
+                    beatsList: this.state.beatsList.concat([{ 
+                                                                name: fileName,
+                                                                speed: speed,                   //edit speed and volume
+                                                                volume: volume
+                                                            }])    
                 });
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
@@ -215,7 +286,7 @@ class Application extends Component {
             <div class="col-md-6">
             <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
             mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}
-            getUploadedSound={this.getUploadedSound} streamDestination={this.destination}/>
+            getUploadedSound={this.getUploadedSound} streamDestination={this.destination} soundsList={this.state.soundsList}/>
             {rTool}
             </div>
             <div class="col-sm-3">
