@@ -54,6 +54,9 @@ class RecordingTool extends Component {
         const hStyle = {
             display: "inline"
         };
+        const recordingButtonStyle = {
+            borderRadius: "50%"
+        }
         let recordButton = null;
         let downloadVisibility = "invisible";//the download button is only visible if the recording is done
         if(this.state.isRecording){
@@ -72,7 +75,7 @@ class RecordingTool extends Component {
         return (<React.Fragment>
             <div class="shadow p-3 mt-2 mb-5 bg-light rounded">
             <h4 style={hStyle}>RecordingTool</h4>
-            <button class=" btn btn-light ml-1 mb-2" onClick={() => this.props.onToolDelete("RecordingTool")}>
+            <button class=" btn btn-light ml-1 mb-2" style={recordingButtonStyle} onClick={() => this.props.onToolDelete("RecordingTool")}>
             <Octicon icon={Dash}/></button>
             <br></br>
             {recordButton}

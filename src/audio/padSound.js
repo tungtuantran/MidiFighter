@@ -69,7 +69,8 @@ export default class PadSound {
     }
 
     connectAllProperties() {
-        this.source.connect(this.gainNode).connect(this.analyser);
+        //connection to destination is needed for recording
+        this.source.connect(this.gainNode).connect(this.analyser).connect(this.destination);
     }
 
 }

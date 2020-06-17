@@ -9,6 +9,7 @@ export default class BackgroundBeatPlayer {
             this.analyser = params.analyser;
             this.setAudio(params.URL);
             this.audioCtx = params.audContext;
+            this.destination = params.destination;
 
 
             //CREATE BUFFER SOURCE
@@ -80,9 +81,10 @@ export default class BackgroundBeatPlayer {
     }
 
     connectAllProperties(){
-        
+
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.analyser);
+        this.analyser.connect(this.destination);//needed for recording
 
         this.startPlaying();
     }

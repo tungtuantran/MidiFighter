@@ -113,7 +113,7 @@ class Application extends Component {
         this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         this.destination = this.audioCtx.createMediaStreamDestination();
         this.analyser = this.audioCtx.createAnalyser();
-        this.analyser.connect(this.audioCtx.destination)
+        this.analyser.connect(this.audioCtx.destination);
     }
 
     setTypeOfAudio(type){
