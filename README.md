@@ -57,6 +57,8 @@ Folgende Tools wurden implementiert:
 - *UploadingTool* (Zum Hochladen von neuen Audiodateien)
 - *BackgrundBeat* (Es wurde beschlossen das BackgroundBeat-Tool optional zu machen)
 
+![UML-Use-Case Diagramm der Anwendung](https://i.ibb.co/cXQsTLx/usecase.png)
+
 
 ## Ordnerstruktur
 
@@ -67,7 +69,7 @@ In `public/padSoundAudio` sind Audiodateien enthalten, die vom Button-Pad zum Ab
 
 ## Anwendungsarchitektur
 
-![UML-Klassendiagramm der Anwendung](https://i.ibb.co/QKwbWxX/uml-Audio-Video.png)
+![UML-Klassendiagramm der Anwendung](https://i.ibb.co/Xxyn1c8/klassendiagram.png)
 
 Für die Entwicklung des Front-Ends wurde React ausgewählt. React ist eine JavaScript-Library, die es erlaubt schnell und einfach Front-End für Webseiten zu erstellen. Die Grundlage des Projekts wurde `create-react-app` erzeugt. Mit create-react-app kann eine vorkonfigurierte Entiwcklungsumgebnung mit allen benötigten Libraries und einem Webserver erzeugt werden. Für CSS wurde des Weiteren `bootstrap` eingesetzt, eine CSS-Library, die es erlaubt schnell ästhetisch ansprechende Webseiten-Elemente zu erzeugen. Zur Wiedergabe von Audio wurde die Web Audio API benutzt. Es wurden außerdem Animationen benutzt(Zum Beispiel Fade-In beim erstellen eines neuen Tools), die mithilfe von `react-spring` umgesetzt wurden.
 
