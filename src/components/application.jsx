@@ -18,67 +18,93 @@ class Application extends Component {
         soundsList: [{
             name: '808',
             speed: 1,
-            volume: 1
+            volume: 1,
+            lowpass: 0,
+            highpass: 0
         },
             {
                 name: 'midtom',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'snare',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'bassC2',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'sqrBass',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'openhat',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'kick',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             }],
         beatsList: [{
             name: 'BoomChuck',
             speed: 1,
-            volume: 1
+            volume: 1,
+            lowpass: 0,
+            highpass: 0
         },
             {
                 name: 'BasicRock',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'Kick',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'OverdriveBass',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'SidechainedPluck',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             },
             {
                 name: 'FutureBassSaw',
                 speed: 1,
-                volume: 1
+                volume: 1,
+                lowpass: 0,
+                highpass: 0
             }],
         choosenTools: [],
         uploadedAudio: []
@@ -133,7 +159,7 @@ class Application extends Component {
         return result[0];
     }
 
-    handleAudioLoading(fileName, audioContent, volume, speed){
+    handleAudioLoading(fileName, audioContent, volume, speed, lowpass, highpass){
         let newFileName = fileName;
         let availableFileName = false;
         let fileCounter = 1;
@@ -144,7 +170,9 @@ class Application extends Component {
                     soundsList: this.state.soundsList.concat([{
                         name: fileName,
                         speed: speed,                   //edit speed and volume
-                        volume: volume
+                        volume: volume,
+                        lowpass: lowpass,
+                        highpass: highpass
                     }])
                 });
                 this.setState({
@@ -159,7 +187,9 @@ class Application extends Component {
                     beatsList: this.state.beatsList.concat([{
                         name: fileName,
                         speed: speed,                   //edit speed and volume
-                        volume: volume
+                        volume: volume,
+                        lowpass: lowpass,
+                        highpass: highpass
                     }])
                 });
                 this.setState({

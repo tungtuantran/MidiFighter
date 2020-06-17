@@ -37,7 +37,10 @@ class BackgroundBeat extends PureComponent {
 
         var speedPlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).speed;
         var volumePlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).volume;
+        var lowpassPlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).lowpass;
+        var highpassPlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).highpass;
 
+        console.log("werte: " + speedPlayer +" "+ volumePlayer + " " + lowpassPlayer + " " + highpassPlayer);
         //var speedPlayer = document.getElementById("speedSlider").value;
         //var volumePlayer = document.getElementById("volumeSlider").value;
 
@@ -48,11 +51,11 @@ class BackgroundBeat extends PureComponent {
             var dst = new ArrayBuffer(uploadedSound.audio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(uploadedSound.audio));
             copy.audio = dst;
-            this.player = new BackgroundBeatPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer} ); 
+            this.player = new BackgroundBeatPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} ); 
 
             return;
         }
-        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer} );  
+        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} );  
 
     }
 

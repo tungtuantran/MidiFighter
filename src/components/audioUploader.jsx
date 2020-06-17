@@ -29,9 +29,12 @@ class AudioUploader extends Component {
                 if (file.type.match(/audio.*/)) {
                     let reader = new FileReader();
                         reader.onload = function(d) {
-                            properties.onAudioLoad(fileName, d.target.result, document.getElementById("volumeSlider2").value, document.getElementById("speedSlider2").value);
+                            properties.onAudioLoad(fileName, d.target.result, document.getElementById("volumeSlider2").value, document.getElementById("speedSlider2").value, document.getElementById("lowpassSlider2").value, document.getElementById("highpassSlider2").value );
                             console.log("volume " + document.getElementById("volumeSlider2").value);
                             console.log("speed " + document.getElementById("speedSlider2").value);
+                            console.log("speed " + document.getElementById("lowpassSlider2").value);
+                            console.log("speed " + document.getElementById("highpassSlider2").value);
+
 
                         };
                         reader.readAsArrayBuffer(file);                   //reader.readAsDataURL(file);
@@ -61,6 +64,10 @@ class AudioUploader extends Component {
             <input type="range" class="form-control-range"  id="volumeSlider2" min="0" max="2" step="0.1" defaultValue="1" ></input>
             Speed:
             <input type="range" class="form-control-range"  id="speedSlider2" min="0" max="2" step="0.1" defaultValue="1" ></input>
+            Lowpass-Filter:
+            <input type="range" class="form-control-range"  id="lowpassSlider2" min="0" max="2" step="0.1" defaultValue="1" ></input>
+            Highpass-Filter:
+            <input type="range" class="form-control-range"  id="highpassSlider2" min="0" max="2" step="0.1" defaultValue="1" ></input>
             </div>
             </form>
 
