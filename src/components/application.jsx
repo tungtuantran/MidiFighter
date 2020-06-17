@@ -134,6 +134,10 @@ class Application extends Component {
     }
 
     handleAudioLoading(fileName, audioContent, volume, speed){
+        let newFileName = fileName;
+        let availableFileName = false;
+        let fileCounter = 1;
+
         if(this.state.typeOfAudio == "Sound"){
             if (!this.state.soundsList.includes(fileName)) {
                 this.setState({
@@ -146,7 +150,7 @@ class Application extends Component {
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
-            }
+            //}
             alert('UPLOAD');
         }
         if(this.state.typeOfAudio == "Beat"){
