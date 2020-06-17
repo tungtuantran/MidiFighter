@@ -106,8 +106,8 @@ export default class BackgroundBeatPlayer {
         console.log("werte4: " + this.speed +" "+ this.volume + " " + this.lowpass + " " + this.highpass);
 
         //if (isFinite(this.lowpass) && isFinite(this.highpass)) {
-            this.lowpassfilter.gain.value = this.lowpass;
-            this.highpassfilter.gain.value = this.highpass;
+        this.lowpassfilter.gain.value = this.lowpass;
+        this.highpassfilter.gain.value = this.highpass;
         //}
 
         console.log("werte5: " + this.highpassfilter.type +" "+ this.highpassfilter.gain.value);
