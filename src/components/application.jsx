@@ -150,7 +150,7 @@ class Application extends Component {
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
-            //}
+            }
             alert('UPLOAD');
         }
         if(this.state.typeOfAudio == "Beat"){
