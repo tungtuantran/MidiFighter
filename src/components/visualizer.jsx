@@ -19,7 +19,7 @@ class Visualizer extends PureComponent {
 
         this.analyser.fftSize = 256;
         let widthCanvas = 230;
-        let heightCanvas = 300;
+        let heightCanvas = 150;
         let bufferLength = this.analyser.frequencyBinCount;
         let dataArray = new Uint8Array(bufferLength);
 
@@ -34,7 +34,7 @@ class Visualizer extends PureComponent {
         let barHeight;
         let x = 0;
         for(var i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i]/2;
+            barHeight = dataArray[i]/6;
             this.canvasCtx.fillStyle = 'rgb(255,50,50)';
             this.canvasCtx.fillRect(x,heightCanvas,barWidth,-barHeight*2);
             x += barWidth + 1;
@@ -51,7 +51,7 @@ class Visualizer extends PureComponent {
         return (<React.Fragment>
             <div class="shadow p-3 bg-light rounded">
             <h4>Visualizer</h4>
-            <canvas id="canvasVis" width="230" height="334"></canvas>
+            <canvas id="canvasVis" width="230" height="150"></canvas>
 
             </div>
             </React.Fragment>);

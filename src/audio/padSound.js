@@ -17,7 +17,7 @@ export default class PadSound {
             this.gainNode = this.audioCtx.createGain();
 
         } else {//if playing uploaded audio
-            
+
             this.analyser = params.analyser;
             this.audioCtx = params.audContext;
             this.destination = params.destination;
@@ -31,7 +31,7 @@ export default class PadSound {
 
                 this.source.playbackRate.value = this.speed;
                 this.gainNode.gain.value = this.volume;
-                
+
                 this.source.start(0);
 
                 this.source.buffer = buffer;
@@ -69,7 +69,7 @@ export default class PadSound {
     }
 
     connectAllProperties() {
-        this.source.connect(this.gainNode).connect(this.analyser).connect(this.destination);
+        this.source.connect(this.gainNode).connect(this.analyser);
     }
 
 }

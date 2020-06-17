@@ -1,4 +1,5 @@
 
+import PadSoundPlayer from '../audio/padSound.js';
 import React, {PureComponent, Component} from 'react';
 
 import { Spring, useSpring, animated } from '@react-spring/web'
@@ -19,15 +20,6 @@ class Metronome extends PureComponent {
 
 
 
-    clockHandStyle = {
-        width: "0",
-        height: "0",
-        borderStyle: "solid",
-        borderWidth: "0 3px 80px 3px",
-        bottom: "40px",
-        borderColor: "transparent transparent #000000 transparent",
-        position: "relative"
-    }
     boxStyle = {
         borderRadius: "10px 10px 5px 5px",
         display: "block",
@@ -43,10 +35,6 @@ class Metronome extends PureComponent {
         this.setState({bpm: input});
     }
 
-    //preventing render() if the state was not changed
-    //shouldComponentUpdate(nextProps, nextState) {
-
-    //}
 
     render(){
 
@@ -60,17 +48,25 @@ class Metronome extends PureComponent {
             <h4 style={hStyle}>Metronome</h4>
             <button  class=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("Metronome")}><Octicon icon={Dash}/></button>
 
+            <div class="row">
+            <div class="col-sm-4">
             <center>
             <div style={this.boxStyle}>
             <App bpm={this.state.bpm} />
             </div>
             </center>
+            </div>
+
+            <div class="col-sm-6">
             <form>
             <div class="form-group">
             <span id="bpmText">{this.state.bpm}bpm</span>
             <input type="range" class="form-control-range mt-2"  id="bpmSlider" min="40" max="218" step="1" defaultValue="40" onClick={this.handleChangeBpm}></input>
             </div>
             </form>
+            </div>
+
+            </div>
 
             </div>
             </React.Fragment>);
@@ -81,7 +77,7 @@ class Metronome extends PureComponent {
 
 
 
-const clockHandStyleN = {
+const clockHandStyle = {
     width: "0",
     height: "0",
     borderStyle: "solid",
@@ -96,7 +92,7 @@ function App(args) {
     dur = parseFloat(dur.toFixed(2));
     const props = useSpring({ config:{duration: dur, precision: 0}, from: { transform: 'translate3d(0,35px,0)  rotateZ(340deg)'}, to: {transform: 'translate3d(0px,35px,0)  rotateZ(380deg)'}, loop: { reverse: true }})
 
-    return <animated.div style={props}><div style={clockHandStyleN}></div></animated.div>
+    return <animated.div style={props}><div style={clockHandStyle}></div></animated.div>
 }
 
 export default Metronome

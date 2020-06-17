@@ -15,71 +15,71 @@ class Application extends Component {
     state = {
         typeOfAudio: "",
         soundToMap: "",
-        soundsList: [{ 
-                        name: '808',
-                        speed: 1,
-                        volume: 1
-                    },
-                    { 
-                        name: 'midtom',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'snare',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'bassC2',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'sqrBass',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'openhat',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'kick',
-                        speed: 1,
-                        volume: 1
-                    }], 
-        beatsList: [{ 
-                        name: 'BoomChuck',
-                        speed: 1,
-                        volume: 1
-                    },
-                    { 
-                        name: 'BasicRock',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'Kick',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'OverdriveBass',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'SidechainedPluck',
-                        speed: 1,
-                        volume: 1
-                    }, 
-                    { 
-                        name: 'FutureBassSaw',
-                        speed: 1,
-                        volume: 1
-                    }], 
+        soundsList: [{
+            name: '808',
+            speed: 1,
+            volume: 1
+        },
+            {
+                name: 'midtom',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'snare',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'bassC2',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'sqrBass',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'openhat',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'kick',
+                speed: 1,
+                volume: 1
+            }],
+        beatsList: [{
+            name: 'BoomChuck',
+            speed: 1,
+            volume: 1
+        },
+            {
+                name: 'BasicRock',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'Kick',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'OverdriveBass',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'SidechainedPluck',
+                speed: 1,
+                volume: 1
+            },
+            {
+                name: 'FutureBassSaw',
+                speed: 1,
+                volume: 1
+            }],
         choosenTools: [],
         uploadedAudio: []
     };
@@ -137,11 +137,11 @@ class Application extends Component {
         if(this.state.typeOfAudio == "Sound"){
             if (!this.state.soundsList.includes(fileName)) {
                 this.setState({
-                    soundsList: this.state.soundsList.concat([{ 
-                                                                name: fileName,
-                                                                speed: speed,                   //edit speed and volume
-                                                                volume: volume
-                                                             }])                         
+                    soundsList: this.state.soundsList.concat([{
+                        name: fileName,
+                        speed: speed,                   //edit speed and volume
+                        volume: volume
+                    }])
                 });
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
@@ -152,11 +152,11 @@ class Application extends Component {
         if(this.state.typeOfAudio == "Beat"){
             if (!this.state.beatsList.includes(fileName)) {
                 this.setState({
-                    beatsList: this.state.beatsList.concat([{ 
-                                                                name: fileName,
-                                                                speed: speed,                   //edit speed and volume
-                                                                volume: volume
-                                                            }])    
+                    beatsList: this.state.beatsList.concat([{
+                        name: fileName,
+                        speed: speed,                   //edit speed and volume
+                        volume: volume
+                    }])
                 });
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
@@ -254,11 +254,11 @@ class Application extends Component {
             config={{duration: 400}}
             from={{opacity: 0}}
             to={{opacity: 1}}>
-                {props => <div style={props}><Metronome onToolDelete={this.handleToolDeleted}/>
+                {props => <div style={props}><Metronome onToolDelete={this.handleToolDeleted} />
                     </div>}
                 </Spring>;
         }
-        //CREATE AUDIO CONTEXT
+
         return (<React.Fragment>
             <div class="container">
             <div class="row p-5"></div>
