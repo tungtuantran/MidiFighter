@@ -6,6 +6,7 @@ export default class PadSound {
             this.volume = params.volume;
             this.lowpass = parseFloat(params.lowpassfilter);
             this.highpass = parseFloat(params.highpassfilter);
+            console.log(this.highpass);
 
             this.analyser = params.analyser;
             this.setAudio(params.URL);
@@ -22,11 +23,13 @@ export default class PadSound {
             this.lowpassfilter = this.audioCtx.createBiquadFilter();
             this.lowpassfilter.type = "lowshelf";
             this.lowpassfilter.frequency.value = 360;
-    
+
             //HIGHPASS FILTER
             this.highpassfilter = this.audioCtx.createBiquadFilter();
             this.highpassfilter.type = "highshelf";
             this.highpassfilter.frequency.value = 3600;
+
+            this.connectAllProperties();
 
         } else {//if playing uploaded audio
 
@@ -41,17 +44,18 @@ export default class PadSound {
             this.highpass = params.highpassfilter;
 
             this.audioCtx.decodeAudioData(params.uploadedAudio.audio).then(function (buffer) {
+                console.log(this.highpass);
                 this.source = this.audioCtx.createBufferSource();
 
                 //LOWPASS FILTER
                 this.lowpassfilter = this.audioCtx.createBiquadFilter();
                 this.lowpassfilter.type = "lowshelf";
-                this.lowpassfilter.frequency.value = 360;
-        
+                this.lowpassfilter.frequency.value = 300;
+
                 //HIGHPASS FILTER
                 this.highpassfilter = this.audioCtx.createBiquadFilter();
                 this.highpassfilter.type = "highshelf";
-                this.highpassfilter.frequency.value = 3600;
+                this.highpassfilter.frequency.value = 3500;
 
                 this.source.playbackRate.value = this.speed;
                 this.gainNode.gain.value = this.volume;
@@ -60,11 +64,10 @@ export default class PadSound {
                 this.lowpassfilter.gain.value = this.lowpass;
                 this.highpassfilter.gain.value = this.highpass;
                 //}
-
-                this.source.start(0);
-
                 this.source.buffer = buffer;
                 this.connectAllProperties();
+
+                this.source.start(0);
 
             }.bind(this));
         }
@@ -103,11 +106,11 @@ export default class PadSound {
         this.source.connect(this.gainNode).connect(this.analyser).connect(this.destination);
         */
 
-       this.source.connect(this.gainNode);
-       this.gainNode.connect(this.highpassfilter);
-       this.highpassfilter.connect(this.lowpassfilter);
-       this.lowpassfilter.connect(this.analyser);
-       this.analyser.connect(this.destination);
+        this.source.connect(this.highpassfilter);
+        this.highpassfilter.connect(this.lowpassfilter);
+        this.lowpassfilter.connect(this.gainNode);
+        this.gainNode.connect(this.analyser);
+        this.analyser.connect(this.destination);
     }
 
 }

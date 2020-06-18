@@ -37,9 +37,9 @@ class ButtonPad extends Component {
             var dst = new ArrayBuffer(uploadedSound.audio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(uploadedSound.audio));
             copy.audio = dst;
-            this.player = new PadSoundPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).speed, volume: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).volume, lowpassfilter: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).lowpass, highpassfilter: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).highpass} ); 
+            this.player = new PadSoundPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).speed, volume: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).volume, lowpassfilter: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).lowpass, highpassfilter: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).highpass} );
 
-            this.player.audioCtx.resume();
+            //this.player.audioCtx.resume();
             return;
         }
 

@@ -179,7 +179,6 @@ class Application extends Component {
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
             }
-            alert('UPLOAD');
         }
         if(this.state.typeOfAudio == "Beat"){
             if (!this.state.beatsList.includes(fileName)) {
@@ -196,7 +195,6 @@ class Application extends Component {
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
             }
-            alert('UPLOAD BEAT');
         }
         console.log(this.state.uploadedAudio)
     }
