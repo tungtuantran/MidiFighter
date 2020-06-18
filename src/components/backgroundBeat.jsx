@@ -33,29 +33,18 @@ class BackgroundBeat extends PureComponent {
     }
 
     getNewPlayer(){
-        console.log(this.soundToPlay);
-
-        var speedPlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).speed;
-        var volumePlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).volume;
-        var lowpassPlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).lowpass;
-        var highpassPlayer = this.props.beatsList.find(beat => beat.name === this.soundToPlay).highpass;
-
-        console.log("werte: " + speedPlayer +" "+ volumePlayer + " " + lowpassPlayer + " " + highpassPlayer);
-        //var speedPlayer = document.getElementById("speedSlider").value;
-        //var volumePlayer = document.getElementById("volumeSlider").value;
-
-
-        var uploadedSound = this.props.getUploadedSound(this.soundToPlay);
-        if(uploadedSound != undefined){//if some uploaded sound should be played
-            const copy = Object.assign({}, uploadedSound);
-            var dst = new ArrayBuffer(uploadedSound.audio.byteLength);
-            new Uint8Array(dst).set(new Uint8Array(uploadedSound.audio));
-            copy.audio = dst;
-            this.player = new BackgroundBeatPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} );
+        var soundInfo = this.props.getInfoToSound(this.soundToPlay, true);
+        if(soundInfo.uploadedAudio != undefined){//if some uploaded sound should be played
+            const copy = Object.assign({}, soundInfo);
+            console.log(soundInfo.uploadedAudio);
+            var dst = new ArrayBuffer(soundInfo.uploadedAudio.byteLength);
+            new Uint8Array(dst).set(new Uint8Array(soundInfo.uploadedAudio));
+            copy.uploadedAudio = dst;
+            this.player = new BackgroundBeatPlayer({uploadedAudio: copy.uploadedAudio, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, settings: soundInfo.settings });
 
             return;
         }
-        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} );
+        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, settings: soundInfo.settings} );
 
     }
 

@@ -2,14 +2,12 @@ export default class BackgroundBeatPlayer {
 
     //constructor(URL, audContext, analyser, streamDestination){
     constructor(params){
+        console.log(params.settings.speed);
+        this.speed = params.settings.speed;
+        this.volume = params.settings.volume;
+        this.lowpass = parseFloat(params.settings.lowpass);
+        this.highpass = parseFloat(params.settings.highpass);
         if(params.URL !== undefined){
-            this.speed = params.speed;
-            this.volume = params.volume;
-            this.lowpass = parseFloat(params.lowpassfilter);
-            this.highpass = parseFloat(params.highpassfilter);
-
-            console.log("werte2: " + this.speed +" "+ this.volume + " " + this.lowpass + " " + this.highpass);
-
 
             this.analyser = params.analyser;
             this.setAudio(params.URL);
@@ -32,7 +30,7 @@ export default class BackgroundBeatPlayer {
             this.lowpassfilter = this.audioCtx.createBiquadFilter();
             this.lowpassfilter.type = "lowshelf";
             this.lowpassfilter.frequency.value = 360;
-    
+
             //HIGHPASS FILTER
             this.highpassfilter = this.audioCtx.createBiquadFilter();
             this.highpassfilter.type = "highshelf";
@@ -46,29 +44,19 @@ export default class BackgroundBeatPlayer {
             this.gainNode = this.audioCtx.createGain();
 
             /*
-            //LOWPASS FILTER
+                //LOWPASS FILTER
             this.lowpassfilter = this.audioCtx.createBiquadFilter();
             this.lowpassfilter.type = "lowshelf";
             this.lowpassfilter.frequency.value = 360;
-    
+
             //HIGHPASS FILTER
             this.highpassfilter = this.audioCtx.createBiquadFilter();
             this.highpassfilter.type = "highshelf";
             this.highpassfilter.frequency.value = 3600;
             */
-           
-            this.speed = params.speed;
-            this.volume = params.volume;
-            this.lowpass = params.lowpassfilter;
-            this.highpass = params.highpassfilter;
-            
-
-            console.log("werte3: " + this.speed +" "+ this.volume + " " + this.lowpass + " " + this.highpass);
 
 
-            console.log(params.uploadedAudio);
-
-            this.audioCtx.decodeAudioData(params.uploadedAudio.audio).then(function (buffer) {
+            this.audioCtx.decodeAudioData(params.uploadedAudio).then(function (buffer) {
                 console.log(this);
                 this.source = this.audioCtx.createBufferSource();
                 this.source.loop = true;
@@ -77,7 +65,7 @@ export default class BackgroundBeatPlayer {
                 this.lowpassfilter = this.audioCtx.createBiquadFilter();
                 this.lowpassfilter.type = "lowshelf";
                 this.lowpassfilter.frequency.value = 360;
-        
+
                 //HIGHPASS FILTER
                 this.highpassfilter = this.audioCtx.createBiquadFilter();
                 this.highpassfilter.type = "highshelf";
@@ -145,13 +133,13 @@ export default class BackgroundBeatPlayer {
         this.gainNode.connect(this.analyser);
         this.analyser.connect(this.destination);//needed for recording
         */
-        
+
         this.source.connect(this.gainNode);
         this.gainNode.connect(this.highpassfilter);
         this.highpassfilter.connect(this.lowpassfilter);
         this.lowpassfilter.connect(this.analyser);
         this.analyser.connect(this.destination);
-        
+
 
         this.startPlaying();
     }

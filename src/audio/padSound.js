@@ -1,13 +1,11 @@
 export default class PadSound {
 
     constructor(params) {
+        this.speed = params.settings.speed;
+        this.volume = params.settings.volume;
+        this.lowpass = parseFloat(params.settings.lowpass);
+        this.highpass = parseFloat(params.settings.highpass);
         if (params.URL !== undefined) {
-            this.speed = params.speed;
-            this.volume = params.volume;
-            this.lowpass = parseFloat(params.lowpassfilter);
-            this.highpass = parseFloat(params.highpassfilter);
-            console.log(this.highpass);
-
             this.analyser = params.analyser;
             this.setAudio(params.URL);
             this.audioCtx = params.audContext;
@@ -38,12 +36,7 @@ export default class PadSound {
             this.destination = params.destination;
             this.gainNode = this.audioCtx.createGain();
 
-            this.speed = params.speed;
-            this.volume = params.volume;
-            this.lowpass = params.lowpassfilter;
-            this.highpass = params.highpassfilter;
-
-            this.audioCtx.decodeAudioData(params.uploadedAudio.audio).then(function (buffer) {
+            this.audioCtx.decodeAudioData(params.uploadedAudio).then(function (buffer) {
                 console.log(this.highpass);
                 this.source = this.audioCtx.createBufferSource();
 

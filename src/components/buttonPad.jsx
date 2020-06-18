@@ -26,36 +26,26 @@ class ButtonPad extends Component {
     };                              //value should me filename (value.wav)
 
     handleMusicButtonClicked(musicButtonId){
-        console.log("hey clicked "+musicButtonId);
-
         let buttons = [...this.state.buttons];
 
-        var uploadedSound = this.props.getUploadedSound(buttons[musicButtonId-1].value);
-        if(uploadedSound != undefined){//if some uploaded sound should be played
-            console.log("im in boyz");
-            const copy = Object.assign({}, uploadedSound);
-            var dst = new ArrayBuffer(uploadedSound.audio.byteLength);
-            new Uint8Array(dst).set(new Uint8Array(uploadedSound.audio));
-            copy.audio = dst;
-            this.player = new PadSoundPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).speed, volume: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).volume, lowpassfilter: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).lowpass, highpassfilter: this.props.soundsList.find(sound => sound.name === buttons[musicButtonId-1].value).highpass} );
-
-            //this.player.audioCtx.resume();
+        var soundInfo = this.props.getInfoToSound(buttons[musicButtonId-1].value, false);
+        if(soundInfo.uploadedAudio != undefined){//if some uploaded sound should be played
+            const copy = Object.assign({}, soundInfo);
+            var dst = new ArrayBuffer(soundInfo.uploadedAudio.byteLength);
+            new Uint8Array(dst).set(new Uint8Array(soundInfo.uploadedAudio));
+            copy.uploadedAudio = dst;
+            this.player = new PadSoundPlayer({uploadedAudio: copy.uploadedAudio, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, settings: copy.settings} );
             return;
         }
 
         if(this.props.mappingSound){
             buttons[musicButtonId-1].value = this.props.mappingSound;
             this.props.onMappingDone("");
-
-            //this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
-            //this.player.audioCtx.resume();
             return;
         }
+
         if(buttons[musicButtonId-1].value != "."){//play only if some sound was mapped to a button
-            console.log(buttons[musicButtonId-1].value + "asdasd");
-            this.player = new PadSoundPlayer({URL: process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination} );
-            //this.player = new PadSoundPlayer(process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', this.props.audioCtx, this.props.analyserNode);
-            this.player.audioCtx.resume();
+            this.player = new PadSoundPlayer({URL: process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav', audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, settings: soundInfo.settings} );
         }
     }
 

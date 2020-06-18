@@ -131,7 +131,7 @@ class Application extends Component {
         this.handleSoundMapping = this.handleSoundMapping.bind(this);
         this.handleToolDeleted = this.handleToolDeleted.bind(this);
         this.handleAudioLoading = this.handleAudioLoading.bind(this);
-        this.getUploadedSound = this.getUploadedSound.bind(this);
+        this.getInfoToSound = this.getInfoToSound.bind(this);
         if (!window.AudioContext || window.webkitAudioContext) {
             alert("Web Audio API is not supported in this browser!")
             return;
@@ -152,11 +152,25 @@ class Application extends Component {
     }
 
 
-    getUploadedSound(soundName){
-        var result = this.state.uploadedAudio.filter(obj => {
+    getInfoToSound(soundName, beatSound){
+        let audioInfo = null;
+        var uploadedAudio = this.state.uploadedAudio.filter(obj => {
             return obj.soundName === soundName
         })
-        return result[0];
+        let soundSettings = null;
+        if(beatSound){
+            soundSettings = this.state.beatsList.filter(obj => {
+                return obj.name === soundName
+            })
+        }else{
+            soundSettings = this.state.soundsList.filter(obj => {
+                return obj.name === soundName
+            })
+        }
+        if(uploadedAudio.length == 0){ audioInfo = { settings: soundSettings[0] };}
+        else{ audioInfo = {uploadedAudio: uploadedAudio[0].audio, settings: soundSettings[0] };}
+
+        return audioInfo;
     }
 
     handleAudioLoading(fileName, audioContent, volume, speed, lowpass, highpass){
@@ -277,7 +291,7 @@ class Application extends Component {
                     streamDestination={this.destination}
                     onToolDelete={this.handleToolDeleted}
                     analyserNode={this.analyser}
-                    getUploadedSound={this.getUploadedSound}
+                    getInfoToSound={this.getInfoToSound}
                     beatsList= {this.state.beatsList}/></div>}
                 </Spring>;
         }
@@ -318,7 +332,7 @@ class Application extends Component {
             <div class="col-md-6">
             <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
             mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}
-            getUploadedSound={this.getUploadedSound} streamDestination={this.destination} soundsList={this.state.soundsList}/>
+            getInfoToSound={this.getInfoToSound} streamDestination={this.destination} soundsList={this.state.soundsList}/>
             {rTool}
             </div>
             <div class="col-sm-3">
