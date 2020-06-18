@@ -299,9 +299,9 @@ class Application extends Component {
             <MapSound onUploadSound={this.handleAudioLoading} onMapping={this.handleSoundMapping}
             soundToMap={this.state.soundToMap} soundsList={this.state.soundsList}/>
             {bBeat}
-            {uTool}
+            {metronome}
             <center>
-            <div class="dropdown " id="toolsDropdown">
+            <div class="dropdown mt-4" id="toolsDropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <Octicon icon={Plus}/> Add Tool
@@ -323,7 +323,7 @@ class Application extends Component {
             </div>
             <div class="col-sm-3">
             <Visualizer analyserNode={this.analyser}/>
-            {metronome}
+            {uTool}
             </div>
             </div>
 

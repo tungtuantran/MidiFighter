@@ -51,11 +51,11 @@ class BackgroundBeat extends PureComponent {
             var dst = new ArrayBuffer(uploadedSound.audio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(uploadedSound.audio));
             copy.audio = dst;
-            this.player = new BackgroundBeatPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} ); 
+            this.player = new BackgroundBeatPlayer({uploadedAudio: copy, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} );
 
             return;
         }
-        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} );  
+        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, speed: speedPlayer, volume: volumePlayer, lowpassfilter: lowpassPlayer, highpassfilter: highpassPlayer} );
 
     }
 
@@ -122,7 +122,7 @@ class BackgroundBeat extends PureComponent {
         );
 
         return (<React.Fragment>
-            <div class="shadow p-3 mb-5 bg-light rounded">
+            <div class="shadow p-3 mt-4 bg-light rounded">
             <h4 style={hStyle}>BackgroundBeat</h4>
             <button  class=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("BackgroundBeat")}><Octicon icon={Dash}/></button>
 

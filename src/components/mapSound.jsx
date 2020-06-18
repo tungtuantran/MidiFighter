@@ -10,7 +10,7 @@ class MapSound extends Component {
         this.handleSoundChoosen = this.handleSoundChoosen.bind(this);
     }
 
-    
+
     handleSoundChoosen(choosenSound) {
         console.log(choosenSound);
         this.props.onMapping(choosenSound);
@@ -43,7 +43,7 @@ class MapSound extends Component {
             <a class="dropdown-item" key={soundName.name} href="#">{soundName.name}</a>
         );
         return (<React.Fragment>
-            <div class="shadow p-3 mb-5 bg-light rounded">
+            <div class="shadow p-3  bg-light rounded">
             <h4>Map Sound</h4>
 
             <div class="dropdown p-1" id="mapSoundDropdown">
