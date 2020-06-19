@@ -17,6 +17,7 @@ class RecordingTool extends Component {
 
         this.destination = this.props.streamDestination;
 
+
         this.mediaRecorder = new MediaRecorder(this.destination.stream);
         this.mediaRecorder.ondataavailable = function (evt) {
             let data = evt.data
@@ -44,7 +45,7 @@ class RecordingTool extends Component {
         };
 
         this.handleButtonClicked = this.handleButtonClicked.bind(this);
-        this.handleMimeTypeButtonClicked = this.handleMimeTypeButtonClicked(this);
+        this.handleMimeTypeButtonClicked = this.handleMimeTypeButtonClicked.bind(this);
     }
 
     handleButtonClicked = function () {
@@ -61,7 +62,8 @@ class RecordingTool extends Component {
         }
     }
 
-    handleMimeTypeButtonClicked = function () {
+    handleMimeTypeButtonClicked(typeOfAudio) {
+        console.log(typeOfAudio);
         debugger
         this.state.mimeType = "audio/webm; codecs=opus"
     }
@@ -73,20 +75,21 @@ class RecordingTool extends Component {
         const recordingButtonStyle = {
             borderRadius: "50%"
         }
+        console.log(this.handleMimeTypeButtonClicked);
         let recordButton = null;
         let downloadVisibility = "invisible";//the download button is only visible if the recording is done
         if (this.state.isRecording) {
             recordButton = <button
-                className="btn btn-dark mb-2" type="button"
-                onClick={this.handleButtonClicked}>
+            className="btn btn-dark mb-2" type="button"
+            onClick={this.handleButtonClicked}>
                 Stop
-            </button>;
+                </button>;
         } else {
             recordButton = <button
-                className="btn btn-danger mb-2" type="button"
-                onClick={this.handleButtonClicked}>
+            className="btn btn-danger mb-2" type="button"
+            onClick={this.handleButtonClicked}>
                 Start
-            </button>;
+                </button>;
             if (this.state.audioPlayerVisibility == "inline") {//if audio player visible
                 downloadVisibility = "visible";
             }
@@ -94,28 +97,28 @@ class RecordingTool extends Component {
 
         return (<React.Fragment>
             <div class="shadow p-3 mt-2 mb-5 bg-light rounded">
-                <h4 style={hStyle}>RecordingTool</h4>
-                <button class=" btn btn-light ml-1 mb-2" style={recordingButtonStyle}
-                        onClick={() => this.props.onToolDelete("RecordingTool")}>
-                    <Octicon icon={Dash}/></button>
-                <br></br>
-                <div className="btn-group mb-2" role="group">
-                    <button type="button" className="btn btn-secondary"
-                            onClick={this.handleMimeTypeButtonClicked}>ogg
-                    </button>
-                    <button type="button" className="btn btn-secondary"
-                            onClick={this.handleMimeTypeButtonClicked}>webm
-                    </button>
-                </div>
-                <br></br>
-                {recordButton}
-                <a id="downloadLink" className={downloadVisibility}>
-                    <button className="btn btn-secondary ml-2 mb-2" type="button">Download</button>
-                </a>
-                <br></br>
-                <audio controls id="audio" style={{display: this.state.audioPlayerVisibility}}></audio>
+            <h4 style={hStyle}>RecordingTool</h4>
+            <button class=" btn btn-light ml-1 mb-2" style={recordingButtonStyle}
+            onClick={() => this.props.onToolDelete("RecordingTool")}>
+            <Octicon icon={Dash}/></button>
+            <br></br>
+            <div className="btn-group mb-2" role="group">
+            <button type="button" className="btn btn-secondary"
+            onClick={() => this.handleMimeTypeButtonClicked("ogg")} >ogg
+            </button>
+            <button type="button" className="btn btn-secondary"
+            onClick={() => this.handleMimeTypeButtonClicked("webm")} >webm
+            </button>
             </div>
-        </React.Fragment>);
+            <br></br>
+            {recordButton}
+            <a id="downloadLink" className={downloadVisibility}>
+            <button className="btn btn-secondary ml-2 mb-2" type="button">Download</button>
+            </a>
+            <br></br>
+            <audio controls id="audio" style={{display: this.state.audioPlayerVisibility}}></audio>
+            </div>
+            </React.Fragment>);
     }
 
 }
