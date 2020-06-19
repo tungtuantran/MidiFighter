@@ -6,7 +6,8 @@ class RecordingTool extends Component {
 
     state = {
         isRecording: false,
-        audioPlayerVisibility: "none"
+        audioPlayerVisibility: "none",
+        mimeType: ""
     }
 
     constructor(props) {
@@ -30,22 +31,24 @@ class RecordingTool extends Component {
                 return;
             }
 
-            let blob = new Blob(chunks, {'type': 'audio/ogg; codecs=opus'});
+            let blob = new Blob(chunks, {'type': 'audio/webm; codecs=opus'});
             let url = URL.createObjectURL(blob);
 
             document.querySelector("audio").src = url;
 
             $("#downloadLink")
                 .attr("href", url)
-                .attr("download", "audio.ogg");
+                .attr("download", "audio.webm");
 
             chunks = [];
         };
 
         this.handleButtonClicked = this.handleButtonClicked.bind(this);
+        this.handleMimeTypeButtonClicked = this.handleMimeTypeButtonClicked(this);
     }
 
     handleButtonClicked = function () {
+        debugger
         let isRecordingState = !this.state.isRecording;
         this.setState({isRecording: isRecordingState});
 
@@ -56,6 +59,11 @@ class RecordingTool extends Component {
             this.mediaRecorder.stop();
             this.setState({audioPlayerVisibility: "inline"});
         }
+    }
+
+    handleMimeTypeButtonClicked = function () {
+        debugger
+        this.state.mimeType = "audio/webm; codecs=opus"
     }
 
     render() {
@@ -69,13 +77,13 @@ class RecordingTool extends Component {
         let downloadVisibility = "invisible";//the download button is only visible if the recording is done
         if (this.state.isRecording) {
             recordButton = <button
-                className="btn btn-dark mb-2" type="button" id="recordButton"
+                className="btn btn-dark mb-2" type="button"
                 onClick={this.handleButtonClicked}>
                 Stop
             </button>;
         } else {
             recordButton = <button
-                className="btn btn-danger mb-2" type="button" id="recordButton"
+                className="btn btn-danger mb-2" type="button"
                 onClick={this.handleButtonClicked}>
                 Start
             </button>;
@@ -90,6 +98,15 @@ class RecordingTool extends Component {
                 <button class=" btn btn-light ml-1 mb-2" style={recordingButtonStyle}
                         onClick={() => this.props.onToolDelete("RecordingTool")}>
                     <Octicon icon={Dash}/></button>
+                <br></br>
+                <div className="btn-group mb-2" role="group">
+                    <button type="button" className="btn btn-secondary"
+                            onClick={this.handleMimeTypeButtonClicked}>ogg
+                    </button>
+                    <button type="button" className="btn btn-secondary"
+                            onClick={this.handleMimeTypeButtonClicked}>webm
+                    </button>
+                </div>
                 <br></br>
                 {recordButton}
                 <a id="downloadLink" className={downloadVisibility}>
