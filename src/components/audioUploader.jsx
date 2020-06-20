@@ -22,24 +22,29 @@ class AudioUploader extends Component {
                 properties.setTypeOfAudio('Beat');
             });
 
+            $('#file-input').click(function () {
+                //to clear prev file-input
+                this.value = null;
+            });
+
             $('#file-input').change(function (event) {
+
                 let file = event.target.files[0];
                 let fileName = file.name;
 
                 if (file.type.match(/audio.*/)) {
                     let reader = new FileReader();
                     reader.onload = function(d) {
+                        console.log("im about to call onAdioLoad");
                         properties.onAudioLoad(fileName, d.target.result, document.getElementById("volumeSlider2").value, document.getElementById("speedSlider2").value, document.getElementById("lowpassSlider2").value, document.getElementById("highpassSlider2").value );
                         console.log("volume " + document.getElementById("volumeSlider2").value);
                         console.log("speed " + document.getElementById("speedSlider2").value);
-                        console.log("lowpass" + document.getElementById("lowpassSlider2").value);
+                        console.log("lowpass " + document.getElementById("lowpassSlider2").value);
                         console.log("highpass " + document.getElementById("highpassSlider2").value);
-
-
                     };
                     reader.readAsArrayBuffer(file);                   //reader.readAsDataURL(file);
 
-                }
+                }     
 
             });
         });

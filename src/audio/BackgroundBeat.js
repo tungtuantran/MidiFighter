@@ -44,7 +44,7 @@ export default class BackgroundBeatPlayer {
             this.gainNode = this.audioCtx.createGain();
 
             /*
-                //LOWPASS FILTER
+            //LOWPASS FILTER
             this.lowpassfilter = this.audioCtx.createBiquadFilter();
             this.lowpassfilter.type = "lowshelf";
             this.lowpassfilter.frequency.value = 360;

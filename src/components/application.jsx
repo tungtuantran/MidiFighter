@@ -143,7 +143,6 @@ class Application extends Component {
     }
 
     setTypeOfAudio(type){
-        console.log(type + "asdsad");
         if(type == "Sound" || type == "Beat"){
             this.setState({
                 typeOfAudio: type,
@@ -174,12 +173,12 @@ class Application extends Component {
     }
 
     handleAudioLoading(fileName, audioContent, volume, speed, lowpass, highpass){
-        let newFileName = fileName;
+
         let availableFileName = false;
         let fileCounter = 1;
 
         if(this.state.typeOfAudio == "Sound"){
-            if (!this.state.soundsList.includes(fileName)) {
+            if (this.state.soundsList.filter(sound => sound.name === fileName).length === 0) {
                 this.setState({
                     soundsList: this.state.soundsList.concat([{
                         name: fileName,
@@ -192,10 +191,35 @@ class Application extends Component {
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
+
+            }else{
+
+                while(!availableFileName){
+                    if(this.state.soundsList.filter(sound => sound.name.toString() === fileName.toString() + fileCounter.toString()).length > 0){
+                        fileCounter++;
+                    }else{
+                        this.setState({
+                            soundsList: this.state.soundsList.concat([{
+                                name: fileName + fileCounter.toString(),
+                                speed: speed,                   //edit speed and volume
+                                volume: volume,
+                                lowpass: lowpass,
+                                highpass: highpass
+                            }])
+                        });
+                        this.setState({
+                            uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName + fileCounter.toString(), audio: audioContent}])
+                        });
+                        availableFileName = true;
+                        return;
+                    }
+                }
+
             }
         }
         if(this.state.typeOfAudio == "Beat"){
-            if (!this.state.beatsList.includes(fileName)) {
+            if (this.state.beatsList.filter(beat => beat.name === fileName).length === 0) {
+                console.log("first file with this name");
                 this.setState({
                     beatsList: this.state.beatsList.concat([{
                         name: fileName,
@@ -208,6 +232,28 @@ class Application extends Component {
                 this.setState({
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
+            }else {
+                console.log("not first file with this name");
+                while(!availableFileName){
+                    if(this.state.beatsList.filter(beat => beat.name.toString() === fileName.toString() + fileCounter.toString()).length > 0){
+                        fileCounter++;
+                    }else{
+                        this.setState({
+                            beatsList: this.state.beatsList.concat([{
+                                name: fileName + fileCounter.toString(),
+                                speed: speed,                   //edit speed and volume
+                                volume: volume,
+                                lowpass: lowpass,
+                                highpass: highpass
+                            }])
+                        });
+                        this.setState({
+                            uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName + fileCounter.toString(), audio: audioContent}])
+                        });
+                        availableFileName = true;
+                        return;
+                    }
+                }
             }
         }
         console.log(this.state.uploadedAudio)
