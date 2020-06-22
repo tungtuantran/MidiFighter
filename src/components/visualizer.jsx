@@ -25,7 +25,6 @@ class Visualizer extends PureComponent {
 
         this.canvasCtx.clearRect(0, 0, widthCanvas, heightCanvas);
 
-        let drawVisual = requestAnimationFrame(this.draw);
         this.analyser.getByteFrequencyData(dataArray);
 
         this.canvasCtx.fillStyle = 'rgb(247, 247, 247)';
@@ -33,12 +32,37 @@ class Visualizer extends PureComponent {
         let barWidth = (widthCanvas / bufferLength) * 1;
         let barHeight;
         let x = 0;
+
+        let dataArrayLine = new Uint8Array(bufferLength);
+        this.analyser.getByteTimeDomainData(dataArrayLine);
+
+        this.canvasCtx.lineWidth = 2;
+        this.canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+        this.canvasCtx.beginPath();
+
+        var stepLine = widthCanvas * 1.0 / bufferLength;
+
         for(var i = 0; i < bufferLength; i++) {
             barHeight = dataArray[i]/6;
-            this.canvasCtx.fillStyle = 'rgb(255,50,50)';
+            let colorR = barHeight*20;
+            this.canvasCtx.fillStyle = 'rgb(255,'+(255-colorR)+','+(255-colorR)+')';
             this.canvasCtx.fillRect(x,heightCanvas,barWidth,-barHeight*2);
+
+            var p = dataArrayLine[i] / 128.0;
+            var posY = p * heightCanvas/4+50;
+
+            if(i === 0) {
+                this.canvasCtx.moveTo(x, posY);
+            } else {
+                this.canvasCtx.lineTo(x, posY);
+            }
+
             x += barWidth + 1;
         }
+
+        this.canvasCtx.lineTo(canvas.width, canvas.height/4+50);
+        this.canvasCtx.stroke();
+        requestAnimationFrame(this.draw);
     }
 
     componentDidMount(){

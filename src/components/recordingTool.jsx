@@ -7,7 +7,7 @@ class RecordingTool extends Component {
     state = {
         isRecording: false,
         audioPlayerVisibility: "none",
-        mimeType: undefined,
+        mimeType: 'ogg',
         chunks: []
     }
 
@@ -24,6 +24,18 @@ class RecordingTool extends Component {
         this.mediaRecorder = new MediaRecorder(this.destination.stream);
         this.mediaRecorder.ondataavailable = this.recorderOnDataAvailable
         this.mediaRecorder.onstop = this.recorderOnStop
+
+
+        var c = this;
+        $(document).ready(function () {
+            $('#oggFormat').click(function () {
+                c.handleMimeTypeButtonClicked("ogg");
+            });
+
+            $('#webmFormat').click(function () {
+                c.handleMimeTypeButtonClicked("webm");
+            });
+        });
     }
 
     handleButtonClicked = function () {
@@ -45,7 +57,7 @@ class RecordingTool extends Component {
     }
 
     handleMimeTypeButtonClicked(typeOfAudio) {
-        this.state.mimeType = typeOfAudio;
+        this.setState({mimeType: typeOfAudio});
     }
 
     recorderOnDataAvailable(evt) {
@@ -79,23 +91,32 @@ class RecordingTool extends Component {
             display: "inline"
         };
         const recordingButtonStyle = {
-            borderRadius: "50%"
+            borderRadius: "100%",
+            height: '60px'
+        }
+        let oggColor = "btn btn-secondary";
+        let webmColor = "btn btn-dark";
+        if(this.state.mimeType == 'ogg'){
+            oggColor = "btn btn-dark";
+            webmColor = "btn btn-secondary";
         }
         console.log(this.handleMimeTypeButtonClicked);
         let recordButton = null;
         let downloadVisibility = "invisible";//the download button is only visible if the recording is done
         if (this.state.isRecording) {
             recordButton = <button
-                className="btn btn-dark mb-2" type="button"
-                onClick={this.handleButtonClicked}>
+            className="btn btn-dark mb-2" type="button"
+            style={recordingButtonStyle}
+            onClick={this.handleButtonClicked}>
                 Stop
-            </button>;
+                </button>;
         } else {
             recordButton = <button
-                className="btn btn-danger mb-2" type="button"
-                onClick={this.handleButtonClicked}>
+            className="btn btn-danger mb-2" type="button"
+            style={recordingButtonStyle}
+            onClick={this.handleButtonClicked}>
                 Start
-            </button>;
+                </button>;
             if (this.state.audioPlayerVisibility == "inline") {//if audio player visible
                 downloadVisibility = "visible";
             }
@@ -103,33 +124,23 @@ class RecordingTool extends Component {
 
         return (<React.Fragment>
             <div class="shadow p-3 mt-2 mb-5 bg-light rounded">
-                <h4 style={hStyle}>RecordingTool</h4>
-                <button class=" btn btn-light ml-1 mb-2" style={recordingButtonStyle}
-                        onClick={() => this.props.onToolDelete("RecordingTool")}>
-                    <Octicon icon={Dash}/></button>
-                <br></br>
-                <div>
-                    <label className="form-check-label mr-2">Format</label>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio"
-                               onInput={() => this.handleMimeTypeButtonClicked("ogg")} name="inlineRadioOptions"/>
-                        <label className="form-check-label" htmlFor="inlineRadio1">ogg</label>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="radio"
-                               onInput={() => this.handleMimeTypeButtonClicked("webm")} name="inlineRadioOptions"/>
-                        <label className="form-check-label" htmlFor="inlineRadio2">webm</label>
-                    </div>
-                </div>
-                <br></br>
-                {recordButton}
-                <a id="downloadLink" className={downloadVisibility}>
-                    <button className="btn btn-secondary ml-2 mb-2" type="button">Download</button>
-                </a>
-                <br></br>
-                <audio controls id="audio" style={{display: this.state.audioPlayerVisibility}}></audio>
+            <h4 style={hStyle}>RecordingTool</h4>
+            <button class=" btn btn-light ml-1 mb-2"
+            onClick={() => this.props.onToolDelete("RecordingTool")}>
+            <Octicon icon={Dash}/></button>
+            <br></br>
+
+            {recordButton}
+            <div class="btn-group p-2" role="group" aria-label="Basic example">
+            <button type="button" class={oggColor}
+            id="oggFormat">ogg</button>
+            <button type="button" class={webmColor}
+            id="webmFormat">webm</button>
             </div>
-        </React.Fragment>);
+            <br></br>
+            <audio controls id="audio" style={{display: this.state.audioPlayerVisibility}}></audio>
+            </div>
+            </React.Fragment>);
     }
 
 }

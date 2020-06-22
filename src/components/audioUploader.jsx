@@ -6,9 +6,15 @@ class AudioUploader extends Component {
     volume = 0;
     speed = 0;
 
+    state = {
+        audioType: 'Sound',
+    }
+
     constructor(props) {
         super(props);
         let properties = props;
+        var c = this;
+        properties.setTypeOfAudio('Sound');
         $(document).ready(function () {
             $('#upload').click(function () {
                 $('#file-input').trigger('click');
@@ -16,10 +22,12 @@ class AudioUploader extends Component {
 
             $('#soundButton').click(function () {
                 properties.setTypeOfAudio('Sound');
+                c.setState({audioType: 'Sound'});
             });
 
             $('#beatButton').click(function () {
                 properties.setTypeOfAudio('Beat');
+                c.setState({audioType: 'Beat'});
             });
 
             $('#file-input').click(function () {
@@ -44,7 +52,7 @@ class AudioUploader extends Component {
                     };
                     reader.readAsArrayBuffer(file);                   //reader.readAsDataURL(file);
 
-                }     
+                }
 
             });
         });
@@ -56,11 +64,18 @@ class AudioUploader extends Component {
     };
 
     render() {
+
+        let beatColor = "btn btn-secondary";
+        let soundColor = "btn btn-dark";
+        if(this.state.audioType == 'Beat'){
+            beatColor = "btn btn-dark";
+            soundColor = "btn btn-secondary";
+        }
         return (<React.Fragment>
 
             <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary" id="soundButton">Sound</button>
-            <button type="button" class="btn btn-secondary" id="beatButton">Beat</button>
+            <button type="button" class={soundColor} id="soundButton">Sound</button>
+            <button type="button" class={beatColor}  id="beatButton">Beat</button>
             </div>
 
             <form>
