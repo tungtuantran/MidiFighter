@@ -11,8 +11,7 @@
 
 Hinweis: .gitignore enthält den Ordner node_modules
 
-**Die Anwendung funktioniert in den folgenden Browsern: Opera, Firefox, Chrome**
-**Und in den folgenden Browsern nicht: Safari**
+**Die Anwendung funktioniert in den folgenden Browsern: Opera, Firefox, Chrome.   Und in den folgenden Browsern nicht: Safari**
 
 ## Benutzung
 
