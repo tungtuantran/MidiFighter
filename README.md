@@ -65,18 +65,19 @@ Beim **BackgroundBeat-Bereich** hat man als Benutzer die Möglcihekeit einen Kla
 
 Da während der Entwicklung neue Ideen für weitere Werkzeuge dazukamen (Zum Beispiel Metronom), wurde es beschlossen das UI-Konzept zu verändern: es kam der *'Add-Tool'-Button* hinzu, der es erlaubte weitere Werkzeuge auszuwählen, damit diese im UI der Anwendung angezeigt werden können. Wenn man ein Werkzeug nicht brauchen sollte, dann können die Nutzer anhand des '-'-Buttons, der auf jedem Werkzeug platziert ist, das Werkzeug schließen. Diese Änderung des UI-Konzeptes war notwendig, um die geforderte Übersichtlichkeit zu erhalten, da ansonsten die Benutzeroberfläche zu überladen wirken würde. Diese Änderung erlaubt es also dem Benutzer die Benutzeroberfläche perfekt an seinne Bedürfnisse anzupassen, was effektives Arbeiten mit der Anwendung ermöglicht.
 
+![UML-Use-Case Diagramm der Anwendung](https://i.ibb.co/cXQsTLx/usecase.png)
+
 Folgende Tools wurden implementiert:
 - *Metronom*
 - *RecordingTool* (Zum Aufzeichnen der Audioausgabe)
 - *UploadingTool* (Zum Hochladen von neuen Audiodateien)
 - *BackgrundBeat* (Es wurde beschlossen das BackgroundBeat-Tool optional zu machen)
 
-![UML-Use-Case Diagramm der Anwendung](https://i.ibb.co/cXQsTLx/usecase.png)
 
 Die erstellte UI kann man auf der nachfolgenden Abbildung sehen (Alle Tools sind aktiviert): 
 
 <center>
-<img src="https://heartbleed.de/ressources/app.png" alt="logo" width="500"/>
+<img src="https://heartbleed.de/ressources/app.png" alt="logo" width="800"/>
 </center>
 
 
