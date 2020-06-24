@@ -103,7 +103,6 @@ class RecordingTool extends Component {
             oggColor = "btn btn-dark";
             webmColor = "btn btn-secondary";
         }
-        console.log(this.handleMimeTypeButtonClicked);
         let recordButton = null;
         let downloadVisibility = "invisible";//the download button is only visible if the recording is done
         if (this.state.isRecording) {
@@ -126,18 +125,18 @@ class RecordingTool extends Component {
         }
 
         return (<React.Fragment>
-            <div class="shadow p-3 mt-2 mb-5 bg-light rounded">
+            <div className="shadow p-3 mt-2 mb-5 bg-light rounded">
             <h4 style={hStyle}>RecordingTool</h4>
-            <button class=" btn btn-light ml-1 mb-2"
+            <button className=" btn btn-light ml-1 mb-2"
             onClick={() => this.props.onToolDelete("RecordingTool")}>
             <Octicon icon={Dash}/></button>
             <br></br>
 
             {recordButton}
-            <div class="btn-group p-2" role="group" aria-label="Basic example">
-            <button type="button" class={oggColor}
+            <div className="btn-group p-2" role="group" aria-label="Basic example">
+            <button type="button" className={oggColor}
             id="oggFormat">ogg</button>
-            <button type="button" class={webmColor}
+            <button type="button" className={webmColor}
             id="webmFormat">webm</button>
             </div>
             <br></br>

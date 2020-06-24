@@ -36,7 +36,6 @@ class BackgroundBeat extends PureComponent {
         var soundInfo = this.props.getInfoToSound(this.soundToPlay, true);
         if(soundInfo.uploadedAudio != undefined){//if some uploaded sound should be played
             const copy = Object.assign({}, soundInfo);
-            console.log(soundInfo.uploadedAudio);
             var dst = new ArrayBuffer(soundInfo.uploadedAudio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(soundInfo.uploadedAudio));
             copy.uploadedAudio = dst;
@@ -64,7 +63,6 @@ class BackgroundBeat extends PureComponent {
         var input = document.getElementById("speedSlider").value;
         if(input == 0){input=0.1;}//it cannot be 0 because then it will start playing with the normal speed
         this.player.source.playbackRate.value = input;
-        console.log(input);
 
     }
     handleChangeVolume(){
@@ -107,20 +105,20 @@ class BackgroundBeat extends PureComponent {
         */
 
         const beatList = this.props.beatsList.map((beatName) =>
-            <a class="dropdown-item" key={beatName.name+"beat"} href="#">{beatName.name}</a>
+            <a className="dropdown-item" key={beatName.name+"beat"} href="#">{beatName.name}</a>
         );
 
         return (<React.Fragment>
-            <div class="shadow p-3 mt-4 bg-light rounded">
+            <div className="shadow p-3 mt-4 bg-light rounded">
             <h4 style={hStyle}>BackgroundBeat</h4>
-            <button  class=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("BackgroundBeat")}><Octicon icon={Dash}/></button>
+            <button className=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("BackgroundBeat")}><Octicon icon={Dash}/></button>
 
-            <div class="dropdown p-1" id="beatDropdown" >
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            <div className="dropdown p-1" id="beatDropdown" >
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {dropdownText}
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {beatList}
 
             </div>
@@ -128,16 +126,16 @@ class BackgroundBeat extends PureComponent {
             </div>
 
             <form>
-            <div class="form-group">
+            <div className="form-group">
             Volume:
-            <input type="range" class="form-control-range"  id="volumeSlider" min="0" max="2" step="0.1" defaultValue="1" onChange={this.handleChangeVolume}></input>
+            <input type="range" className="form-control-range"  id="volumeSlider" min="0" max="2" step="0.1" defaultValue="1" onChange={this.handleChangeVolume}></input>
             Speed:
-            <input type="range" class="form-control-range"  id="speedSlider" min="0" max="2" step="0.1" defaultValue="1" onChange={this.handleChangeSpeed}></input>
+            <input type="range" className="form-control-range"  id="speedSlider" min="0" max="2" step="0.1" defaultValue="1" onChange={this.handleChangeSpeed}></input>
             </div>
             </form>
 
             <center>
-            <button  class="btn btn-dark p-1   "   onClick={this.handlePlayBackground}>
+            <button className="btn btn-dark p-1   "   onClick={this.handlePlayBackground}>
 
             {playButton}
 

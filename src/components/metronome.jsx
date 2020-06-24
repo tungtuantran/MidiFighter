@@ -42,14 +42,13 @@ class Metronome extends PureComponent {
             display: "inline"
         };
         const toolName = "Metronome";
-        console.log("render metronome");
         return (<React.Fragment>
-            <div class="shadow p-3 mt-2 bg-light rounded">
+            <div className="shadow p-3 mt-2 bg-light rounded">
             <h4 style={hStyle}>Metronome</h4>
-            <button  class=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("Metronome")}><Octicon icon={Dash}/></button>
+            <button className=" btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("Metronome")}><Octicon icon={Dash}/></button>
 
-            <div class="row">
-            <div class="col-sm-4">
+            <div className="row">
+            <div className="col-sm-4">
             <center>
             <div style={this.boxStyle}>
             <App bpm={this.state.bpm} />
@@ -57,11 +56,11 @@ class Metronome extends PureComponent {
             </center>
             </div>
 
-            <div class="col-sm-6">
+            <div className="col-sm-6">
             <form>
-            <div class="form-group">
+            <div className="form-group">
             <span id="bpmText">{this.state.bpm}bpm</span>
-            <input type="range" class="form-control-range mt-2"  id="bpmSlider" min="40" max="218" step="1" defaultValue="40" onClick={this.handleChangeBpm}></input>
+            <input type="range" className="form-control-range mt-2"  id="bpmSlider" min="40" max="218" step="1" defaultValue="40" onClick={this.handleChangeBpm}></input>
             </div>
             </form>
             </div>

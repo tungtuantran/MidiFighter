@@ -219,7 +219,6 @@ class Application extends Component {
         }
         if(this.state.typeOfAudio == "Beat"){
             if (this.state.beatsList.filter(beat => beat.name === fileName).length === 0) {
-                console.log("first file with this name");
                 this.setState({
                     beatsList: this.state.beatsList.concat([{
                         name: fileName,
@@ -233,7 +232,6 @@ class Application extends Component {
                     uploadedAudio: this.state.uploadedAudio.concat([{soundName: fileName, audio: audioContent}])
                 });
             }else {
-                console.log("not first file with this name");
                 while(!availableFileName){
                     if(this.state.beatsList.filter(beat => beat.name.toString() === fileName.toString() + fileCounter.toString()).length > 0){
                         fileCounter++;
@@ -256,7 +254,6 @@ class Application extends Component {
                 }
             }
         }
-        console.log(this.state.uploadedAudio)
     }
 
     handleToolChoosen(toolName) {
@@ -272,16 +269,13 @@ class Application extends Component {
         if (sound == "") {//if mapping is done
             //this.state.soundToMap = "";
             this.setState({soundToMap: ""});
-            console.log("mapping end!");
             return;
         }
         //this.state.soundToMap = sound;
         this.setState({soundToMap: sound});
-        console.log("mapping start!");
     }
     //if the user clicks on the "-"-button of some tool
     handleToolDeleted(tool ){
-        console.log(tool);
         if (this.state.choosenTools.includes(tool) ) {
             const index = this.state.choosenTools.indexOf(tool);
             delete this.state.choosenTools[index];
@@ -291,12 +285,10 @@ class Application extends Component {
             this.setState({
                 choosenTools: filtered
             });
-            console.log(this.state.choosenTools);
         }
     }
 
     render() {
-        console.log("rendering!");
         let bBeat = null;
         let metronome = null;
         let uTool = null;
@@ -352,36 +344,36 @@ class Application extends Component {
         }
 
         return (<React.Fragment>
-            <div class="container">
-            <div class="row p-5"></div>
-            <div class="row">
-            <div class="col-sm-3">
+            <div className="container">
+            <div className="row p-5"></div>
+            <div className="row">
+            <div className="col-sm-3">
             <MapSound onUploadSound={this.handleAudioLoading} onMapping={this.handleSoundMapping}
             soundToMap={this.state.soundToMap} soundsList={this.state.soundsList}/>
             {bBeat}
             {metronome}
             <center>
-            <div class="dropdown mt-4" id="toolsDropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            <div className="dropdown mt-4" id="toolsDropdown">
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <Octicon icon={Plus}/> Add Tool
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">RecordingTool</a>
-            <a class="dropdown-item" href="#">UploadingTool</a>
-            <a class="dropdown-item" href="#">BackgroundBeat</a>
-            <a class="dropdown-item" href="#">Metronome</a>
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a className="dropdown-item" href="#">RecordingTool</a>
+            <a className="dropdown-item" href="#">UploadingTool</a>
+            <a className="dropdown-item" href="#">BackgroundBeat</a>
+            <a className="dropdown-item" href="#">Metronome</a>
             </div>
             </div>
             </center>
             </div>
-            <div class="col-md-6">
+            <div className="col-md-6">
             <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
             mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}
             getInfoToSound={this.getInfoToSound} streamDestination={this.destination} soundsList={this.state.soundsList}/>
             {rTool}
             </div>
-            <div class="col-sm-3">
+            <div className="col-sm-3">
             <Visualizer analyserNode={this.analyser}/>
             {uTool}
             </div>

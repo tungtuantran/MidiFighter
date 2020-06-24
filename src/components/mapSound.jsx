@@ -12,7 +12,6 @@ class MapSound extends Component {
 
 
     handleSoundChoosen(choosenSound) {
-        console.log(choosenSound);
         this.props.onMapping(choosenSound);
 
     }
@@ -26,7 +25,6 @@ class MapSound extends Component {
                 var $dropdown = $(dropdown);
                 $dropdown.find('.dropdown-menu a').on('click', function () {
                     if ($dropdown[0].id == "mapSoundDropdown") {
-                        console.log("yo");
                         let sound = $dropdown.find('#dropdownMenuButton').text($(this).text())[0].innerText;
                         c.handleSoundChoosen(sound);
                     }
@@ -34,24 +32,23 @@ class MapSound extends Component {
                 });
             });
         });
-        console.log("rendering map!");
         let dropdownText = "Choose Sound";
         if (this.props.soundToMap) {
             dropdownText = this.props.soundToMap;
         }
         const soundList = this.props.soundsList.map(soundName =>
-            <a class="dropdown-item" key={soundName.name} href="#">{soundName.name}</a>
+            <a className="dropdown-item" key={soundName.name} href="#">{soundName.name}</a>
         );
         return (<React.Fragment>
-            <div class="shadow p-3  bg-light rounded">
+            <div className="shadow p-3  bg-light rounded">
             <h4>Map Sound</h4>
 
-            <div class="dropdown p-1" id="mapSoundDropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            <div className="dropdown p-1" id="mapSoundDropdown">
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {dropdownText}
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {soundList}
             </div>
 

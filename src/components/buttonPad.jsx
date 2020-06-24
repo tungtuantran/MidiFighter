@@ -88,15 +88,15 @@ class ButtonPad extends Component {
         //{background}
         //<div class="shadow p-3 mb-5 bg-light rounded">
         return (<React.Fragment>
-            <div class={colorBackground} >
+            <div className={colorBackground} >
             <center>
-            <div class="row" >
+            <div className="row" >
             {this.state.buttons.map(button => (button.id <=4) ?  <MusicButton id={button.id} key={button.id} value={button.value} onClickButton={this.handleMusicButtonClicked} color={colorButton}/> : "")}
             </div>
-            <div class="row" >
+            <div className="row" >
             {this.state.buttons.map(button => (button.id > 4 && button.id <= 8) ?  <MusicButton id={button.id} key={button.id} value={button.value} onClickButton={this.handleMusicButtonClicked} color={colorButton}/> : "")}
             </div>
-            <div class="row" >
+            <div className="row" >
             {this.state.buttons.map(button => (button.id > 8 && button.id <= 12) ? <MusicButton id={button.id} key={button.id} value={button.value} onClickButton={this.handleMusicButtonClicked} color={colorButton}/> : "")}
             </div>
             </center>

@@ -22,8 +22,8 @@ class MusicButton extends Component {
     render(){
         let color = "btn "+this.props.color+ " btn-block p-4 mb-4";
         return (<React.Fragment>
-            <div class="col-sm-3">
-            <button  class={color}   onClick={this.handlePlay}>{this.props.value}</button>
+            <div className="col-sm-3">
+            <button className={color}   onClick={this.handlePlay}>{this.props.value}</button>
             </div>
             </React.Fragment>);
     }
