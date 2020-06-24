@@ -80,6 +80,9 @@ Die erstellte UI kann man auf der nachfolgenden Abbildung sehen (Alle Tools sind
 <img src="https://heartbleed.de/ressources/app.png" alt="logo" width="800"/>
 </center>
 
+<br>
+<br>
+
 
 ## Anwendungsarchitektur
 
@@ -91,5 +94,7 @@ React erlaubt es Webseiten komponentenbasiert zu Entwickeln. Jedes UI Element de
 
 Wie man in der Abbildung sehen kann, enthält die Komponente *Application* alle UI-Komponenten der Anwendung. Folgende Komponenten sind in *Application* fest verbaut: *Visualizer, ButtonPad, MapSound*. Folgende Komponenden können mit dem 'AddTool'-Button hinzugefügt werden: *BackgroundBeat, Metronom, RecordingTool, UploadingTool*. Die ButtonPad Komponente enthält MusicButton-Komponenten, die die Buttons der Drum Machine darstellen und benutzt außerdem die Klasse PadSound zum Abspielen von Klängen. Die BackgroundBeat-Komponente benutzt die Klasse BackgroundBeatPlayer zur Wiedergabe des Hintergrund-Beats. Die meisten wichtigen Informationen (wie zum Beispiel die Liste mit allen abspielbaren Klängen) werden zentral in der Klasse Application verwaltet und bei bedarf an die verbundenen Komponenten weitergereicht.
 
+Wenn man mit Web Audio API arbeitet müssen die Nodes, die für die Audio-Wiedergabe zuständig sind mit, mit dem Destination-Node verbunden werden, sodass man das wiedergegebene Audio hören kann. Nun ist es aber so, dass in der entwickelten Anwendung zwischen Destination und dem Input mehrere Nodes dazwischengeschaltet werden müssen: **AnalyserNode**(Damit alle abgespielten Sounds visualisiert werden können) und **Effekte**, die auf das Audio-Input angewendet werden (GainNode, Highpass-Filter, Lowpass-Filter). Dazu kommt noch, dass die Audio-Wiedergabe aufgenommen werden kann, weshalb man mit den MediaRecorder an den DestinationNode angeschlossen hat, sodass man alles, was wiedergegeben wird, aufzeichnen kann.
 
+![web-audio-api:vom input zur destination](https://i.ibb.co/dDwBvsZ/webAPI.png)
 
