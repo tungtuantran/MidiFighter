@@ -87,6 +87,9 @@ class RecordingTool extends Component {
     }
 
     render() {
+        const downloadStyle = {
+            marginTop: '-25px'
+        };
         const hStyle = {
             display: "inline"
         };
@@ -139,6 +142,9 @@ class RecordingTool extends Component {
             </div>
             <br></br>
             <audio controls id="audio" style={{display: this.state.audioPlayerVisibility}}></audio>
+            <a id="downloadLink" className={downloadVisibility} >
+            <button className="btn btn-secondary ml-5" style={downloadStyle} type="button">Download</button>
+            </a>
             </div>
             </React.Fragment>);
     }

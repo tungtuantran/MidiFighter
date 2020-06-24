@@ -1,5 +1,6 @@
 # Dokumentation
 
+![appScreen](https://i.ibb.co/bXW99MM/app.png)
 ## Installation
 
 1. `git clone https://github.com/tungtuantran/MidiFighter.git`
@@ -9,6 +10,9 @@
 3. `npm install`  -> um alle benötigten Abhängigkeiten zu instalieren
 
 Hinweis: .gitignore enthält den Ordner node_modules
+
+**Die Anwendung funktioniert in den folgenden Browsern: Opera, Firefox, Chrome**
+**Und in den folgenden Browsern nicht: Safari**
 
 ## Benutzung
 
@@ -52,30 +56,30 @@ Beim **BackgroundBeat-Bereich** hat man als Benutzer die Möglcihekeit einen Kla
 Da während der Entwicklung neue Ideen für weitere Werkzeuge dazukamen (Zum Beispiel Metronom), wurde es beschlossen das UI-Konzept zu verändern: es kam der *'Add-Tool'-Button* hinzu, der es erlaubte weitere Werkzeuge auszuwählen, damit diese im UI der Anwendung angezeigt werden können. Wenn man ein Werkzeug nicht brauchen sollte, dann können die Nutzer anhand des '-'-Buttons, der auf jedem Werkzeug platziert ist, das Werkzeug schließen. Diese Änderung des UI-Konzeptes war notwendig, um die geforderte Übersichtlichkeit zu erhalten, da ansonsten die Benutzeroberfläche zu überladen wirken würde. Diese Änderung erlaubt es also dem Benutzer die Benutzeroberfläche perfekt an seinne Bedürfnisse anzupassen, was effektives Arbeiten mit der Anwendung ermöglicht.
 
 Folgende Tools wurden implementiert:
-- *Metronom*
-- *RecordingTool* (Zum Aufzeichnen der Audioausgabe)
-- *UploadingTool* (Zum Hochladen von neuen Audiodateien)
+    - *Metronom*
+    - *RecordingTool* (Zum Aufzeichnen der Audioausgabe)
+    - *UploadingTool* (Zum Hochladen von neuen Audiodateien)
 - *BackgrundBeat* (Es wurde beschlossen das BackgroundBeat-Tool optional zu machen)
 
-![UML-Use-Case Diagramm der Anwendung](https://i.ibb.co/cXQsTLx/usecase.png)
+    ![UML-Use-Case Diagramm der Anwendung](https://i.ibb.co/cXQsTLx/usecase.png)
 
 
 ## Ordnerstruktur
 
-Der `src` Ordner enthält den gesamten JavaScript-Code des Projekts. Im `src` Ordner sind zwei weitere Ordner enthalten: `components` (enthält die React-Component-Klassen) und `audio` (enthält Klassen, die für Audio-Wiedergabe zuständig sind).
+    Der `src` Ordner enthält den gesamten JavaScript-Code des Projekts. Im `src` Ordner sind zwei weitere Ordner enthalten: `components` (enthält die React-Component-Klassen) und `audio` (enthält Klassen, die für Audio-Wiedergabe zuständig sind).
 
-In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Background-Beat-Funktionalität genutzt werden.
-In `public/padSoundAudio` sind Audiodateien enthalten, die vom Button-Pad zum Abspielen einzelner Klänge benutzt werden.
+    In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Background-Beat-Funktionalität genutzt werden.
+    In `public/padSoundAudio` sind Audiodateien enthalten, die vom Button-Pad zum Abspielen einzelner Klänge benutzt werden.
 
 ## Anwendungsarchitektur
 
-![UML-Klassendiagramm der Anwendung](https://i.ibb.co/Xxyn1c8/klassendiagram.png)
+    ![UML-Klassendiagramm der Anwendung](https://i.ibb.co/Xxyn1c8/klassendiagram.png)
 
-Für die Entwicklung des Front-Ends wurde React ausgewählt. React ist eine JavaScript-Library, die es erlaubt schnell und einfach Front-End für Webseiten zu erstellen. Die Grundlage des Projekts wurde `create-react-app` erzeugt. Mit create-react-app kann eine vorkonfigurierte Entiwcklungsumgebnung mit allen benötigten Libraries und einem Webserver erzeugt werden. Für CSS wurde des Weiteren `bootstrap` eingesetzt, eine CSS-Library, die es erlaubt schnell ästhetisch ansprechende Webseiten-Elemente zu erzeugen. Zur Wiedergabe von Audio wurde die Web Audio API benutzt. Es wurden außerdem Animationen benutzt(Zum Beispiel Fade-In beim erstellen eines neuen Tools), die mithilfe von `react-spring` umgesetzt wurden.
+    Für die Entwicklung des Front-Ends wurde React ausgewählt. React ist eine JavaScript-Library, die es erlaubt schnell und einfach Front-End für Webseiten zu erstellen. Die Grundlage des Projekts wurde `create-react-app` erzeugt. Mit create-react-app kann eine vorkonfigurierte Entiwcklungsumgebnung mit allen benötigten Libraries und einem Webserver erzeugt werden. Für CSS wurde des Weiteren `bootstrap` eingesetzt, eine CSS-Library, die es erlaubt schnell ästhetisch ansprechende Webseiten-Elemente zu erzeugen. Zur Wiedergabe von Audio wurde die Web Audio API benutzt. Es wurden außerdem Animationen benutzt(Zum Beispiel Fade-In beim erstellen eines neuen Tools), die mithilfe von `react-spring` umgesetzt wurden.
 
-React erlaubt es Webseiten komponentenbasiert zu Entwickeln. Jedes UI Element der Webseite kann als eine getrennte Komponente repräsentiert werden, wobei die einzelnen Komponenten aus anderen Komponenten zusammengesetzt werden können. React stellt dafür die Klasse `Component` zur Verfügung, von der alle erstllten Komponenten erben müssen. Im oben abbgebildeten Klassendiagramm des Projekts sieht man den generellen Aufabau der Anwendung (Die mit grau gekennzeichneten Klassen sind keine React-Komponenten). Statt Component wurde jedoch fast ausschließlich `PureComponent`, da es bei dieser Klasse die `render()`-Methode nur aufgerufen wird, wenn sich etwas am Zustand der Komponente sich geändert hat, was gut für die Performance ist. Bei der normalen Component Klasse wird die `render()`-Methode jedes mal aufgerufen, wenn sich etwas am Zustand der Eltern-Komponente sich ändert.
+    React erlaubt es Webseiten komponentenbasiert zu Entwickeln. Jedes UI Element der Webseite kann als eine getrennte Komponente repräsentiert werden, wobei die einzelnen Komponenten aus anderen Komponenten zusammengesetzt werden können. React stellt dafür die Klasse `Component` zur Verfügung, von der alle erstllten Komponenten erben müssen. Im oben abbgebildeten Klassendiagramm des Projekts sieht man den generellen Aufabau der Anwendung (Die mit grau gekennzeichneten Klassen sind keine React-Komponenten). Statt Component wurde jedoch fast ausschließlich `PureComponent`, da es bei dieser Klasse die `render()`-Methode nur aufgerufen wird, wenn sich etwas am Zustand der Komponente sich geändert hat, was gut für die Performance ist. Bei der normalen Component Klasse wird die `render()`-Methode jedes mal aufgerufen, wenn sich etwas am Zustand der Eltern-Komponente sich ändert.
 
-Wie man in der Abbildung sehen kann, enthält die Komponente *Application* alle UI-Komponenten der Anwendung. Folgende Komponenten sind in *Application* fest verbaut: *Visualizer, ButtonPad, MapSound*. Folgende Komponenden können mit dem 'AddTool'-Button hinzugefügt werden: *BackgroundBeat, Metronom, RecordingTool, UploadingTool*. Die ButtonPad Komponente enthält MusicButton-Komponenten, die die Buttons des Synthesizers darstellen und benutzt außerdem die Klasse PadSound zum Abspielen von Klängen. Die BackgroundBeat-Komponente benutzt die Klasse BackgroundBeatPlayer zur Wiedergabe des Hintergrund-Beats. Die meisten wichtigen Informationen (wie zum Beispiel die Liste mit allen abspielbaren Klängen) werden zentral in der Klasse Application verwaltet und bei bedarf an die verbundenen Komponenten weitergereicht.
+    Wie man in der Abbildung sehen kann, enthält die Komponente *Application* alle UI-Komponenten der Anwendung. Folgende Komponenten sind in *Application* fest verbaut: *Visualizer, ButtonPad, MapSound*. Folgende Komponenden können mit dem 'AddTool'-Button hinzugefügt werden: *BackgroundBeat, Metronom, RecordingTool, UploadingTool*. Die ButtonPad Komponente enthält MusicButton-Komponenten, die die Buttons des Synthesizers darstellen und benutzt außerdem die Klasse PadSound zum Abspielen von Klängen. Die BackgroundBeat-Komponente benutzt die Klasse BackgroundBeatPlayer zur Wiedergabe des Hintergrund-Beats. Die meisten wichtigen Informationen (wie zum Beispiel die Liste mit allen abspielbaren Klängen) werden zentral in der Klasse Application verwaltet und bei bedarf an die verbundenen Komponenten weitergereicht.
 
 
 
