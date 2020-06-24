@@ -1,6 +1,17 @@
-# Dokumentation
 
-![appScreen](https://i.ibb.co/bXW99MM/app.png)
+
+# MidiFighter
+<center>
+<img src="https://heartbleed.de/ressources/midiFighterLogo.png" alt="logo" width="200"/>
+</center>
+
+Die vorliegende Anwendung wurde im Rahmen des Moduls "Audio- und Videotechnik", and der HTW-Berlin entwickelt. Die implementierte Anwendung ist eine Drum Machine, die es dem Benutzer erlaubt Musik mithilfe von eines Drum-Machine-Keyboards und dem auswählbaren Hintergrund-Beat, zu erzeugen. Die Mitglieder des Teams sind:
+
+- **Cong Minh Nguyen, 564030**
+- **Tung Tuan Tran, 564070**
+- **Andrey Borisov, 563858**
+    
+
 ## Installation
 
 1. `git clone https://github.com/tungtuantran/MidiFighter.git`
@@ -18,14 +29,12 @@ Hinweis: .gitignore enthält den Ordner node_modules
 Zum starten des Servers `npm start` ausführen.
 
 
+## Ordnerstruktur
 
-## Allgemeines
+Der `src` Ordner enthält den gesamten JavaScript-Code des Projekts. Im `src` Ordner sind zwei weitere Ordner enthalten: `components` (enthält die React-Component-Klassen) und `audio` (enthält Klassen, die für Audio-Wiedergabe zuständig sind).
 
-Die vorliegende Anwendung wurde im Rahmen des Moduls "Audio- und Videotechnik", and der HTW-Berlin entwickelt. Die implementierte Anwendung ist eine Drum Machine, die es dem Benutzer erlaubt Musik mithilfe von eines Drum-Machine-Keyboards und dem auswählbaren Hintergrund-Beat, zu erzeugen. Die Mitglieder des Teams sind:
-
-- **Cong Minh Nguyen, 564030**
-- **Tung Tuan Tran, 564070**
-- **Andrey Borisov, 563858**
+In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Background-Beat-Funktionalität genutzt werden.
+In `public/padSoundAudio` sind Audiodateien enthalten, die vom Button-Pad zum Abspielen einzelner Klänge benutzt werden.
 
 
 
@@ -57,20 +66,19 @@ Beim **BackgroundBeat-Bereich** hat man als Benutzer die Möglcihekeit einen Kla
 Da während der Entwicklung neue Ideen für weitere Werkzeuge dazukamen (Zum Beispiel Metronom), wurde es beschlossen das UI-Konzept zu verändern: es kam der *'Add-Tool'-Button* hinzu, der es erlaubte weitere Werkzeuge auszuwählen, damit diese im UI der Anwendung angezeigt werden können. Wenn man ein Werkzeug nicht brauchen sollte, dann können die Nutzer anhand des '-'-Buttons, der auf jedem Werkzeug platziert ist, das Werkzeug schließen. Diese Änderung des UI-Konzeptes war notwendig, um die geforderte Übersichtlichkeit zu erhalten, da ansonsten die Benutzeroberfläche zu überladen wirken würde. Diese Änderung erlaubt es also dem Benutzer die Benutzeroberfläche perfekt an seinne Bedürfnisse anzupassen, was effektives Arbeiten mit der Anwendung ermöglicht.
 
 Folgende Tools wurden implementiert:
-    - *Metronom*
-    - *RecordingTool* (Zum Aufzeichnen der Audioausgabe)
-    - *UploadingTool* (Zum Hochladen von neuen Audiodateien)
-    - *BackgrundBeat* (Es wurde beschlossen das BackgroundBeat-Tool optional zu machen)
+- *Metronom*
+- *RecordingTool* (Zum Aufzeichnen der Audioausgabe)
+- *UploadingTool* (Zum Hochladen von neuen Audiodateien)
+- *BackgrundBeat* (Es wurde beschlossen das BackgroundBeat-Tool optional zu machen)
 
 ![UML-Use-Case Diagramm der Anwendung](https://i.ibb.co/cXQsTLx/usecase.png)
 
+Die erstellte UI kann man auf der nachfolgenden Abbildung sehen (Alle Tools sind aktiviert): 
 
-## Ordnerstruktur
+<center>
+<img src="https://heartbleed.de/ressources/app.png" alt="logo" width="500"/>
+</center>
 
-Der `src` Ordner enthält den gesamten JavaScript-Code des Projekts. Im `src` Ordner sind zwei weitere Ordner enthalten: `components` (enthält die React-Component-Klassen) und `audio` (enthält Klassen, die für Audio-Wiedergabe zuständig sind).
-
-In `public/backgroundbeatAudio` sind Audiodateien enthalten, die für die Background-Beat-Funktionalität genutzt werden.
-In `public/padSoundAudio` sind Audiodateien enthalten, die vom Button-Pad zum Abspielen einzelner Klänge benutzt werden.
 
 ## Anwendungsarchitektur
 
