@@ -34,17 +34,22 @@ class BackgroundBeat extends PureComponent {
 
     getNewPlayer(){
         var soundInfo = this.props.getInfoToSound(this.soundToPlay, true);
-        if(soundInfo.uploadedAudio != undefined){//if some uploaded sound should be played
-            const copy = Object.assign({}, soundInfo);
+        let playerArguments = {
+            audContext:this.props.audioCtx,
+            analyser: this.props.analyserNode,
+            destination: this.props.streamDestination,
+            settings: soundInfo.settings};
+
+        if(soundInfo.uploadedAudio !== undefined){//if some uploaded sound should be played
             var dst = new ArrayBuffer(soundInfo.uploadedAudio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(soundInfo.uploadedAudio));
-            copy.uploadedAudio = dst;
-            this.player = new BackgroundBeatPlayer({uploadedAudio: copy.uploadedAudio, audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, settings: soundInfo.settings });
-
-            return;
+            playerArguments.uploadedAudio = dst;
+        }else{//if some standard sound should be played
+            soundInfo.settings.speed = document.getElementById("speedSlider").value;
+            soundInfo.settings.volume = document.getElementById("volumeSlider").value;
+            playerArguments.URL = process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav';
         }
-        this.player = new BackgroundBeatPlayer({URL: process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav',  audContext:this.props.audioCtx, analyser: this.props.analyserNode, destination: this.props.streamDestination, settings: soundInfo.settings} );
-
+        this.player = new BackgroundBeatPlayer(playerArguments);
     }
 
     handlePlayBackground(){
