@@ -70,13 +70,10 @@ class Visualizer extends PureComponent {
     }
 
     render(){
-        let dropdownText = "Choose Sound";
-        if(this.props.soundToMap){ dropdownText = this.props.soundToMap}
         return (<React.Fragment>
             <div className="shadow p-3 bg-light rounded">
             <h4>Visualizer</h4>
             <canvas id="canvasVis" width="230" height="150"></canvas>
-
             </div>
             </React.Fragment>);
     }

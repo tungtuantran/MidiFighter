@@ -13,7 +13,6 @@ class MapSound extends Component {
 
     handleSoundChoosen(choosenSound) {
         this.props.onMapping(choosenSound);
-
     }
 
 
@@ -28,10 +27,10 @@ class MapSound extends Component {
                         let sound = $dropdown.find('#dropdownMenuButton').text($(this).text())[0].innerText;
                         c.handleSoundChoosen(sound);
                     }
-                    //$dropdown.find('button').text($(this).text()).append(' <span class="caret"></span>');
                 });
             });
         });
+
         let dropdownText = "Choose Sound";
         if (this.props.soundToMap) {
             dropdownText = this.props.soundToMap;
@@ -48,6 +47,7 @@ class MapSound extends Component {
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {dropdownText}
             </button>
+
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {soundList}
             </div>

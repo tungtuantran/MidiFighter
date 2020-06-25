@@ -1,103 +1,58 @@
 export default class PadSound {
 
     constructor(params) {
-        this.speed = params.settings.speed;
-        this.volume = params.settings.volume;
         this.lowpass = parseFloat(params.settings.lowpass);
         this.highpass = parseFloat(params.settings.highpass);
+
+        this.analyser = params.analyser;
+        this.audioCtx = params.audContext;
+        this.destination = params.destination;
+        this.gainNode = this.audioCtx.createGain();
+
+        //LOWPASS FILTER
+        this.lowpassfilter = this.audioCtx.createBiquadFilter();
+        this.lowpassfilter.type = "lowshelf";
+        this.lowpassfilter.frequency.value = 360;
+
+        //HIGHPASS FILTER
+        this.highpassfilter = this.audioCtx.createBiquadFilter();
+        this.highpassfilter.type = "highshelf";
+        this.highpassfilter.frequency.value = 3600;
+
+        this.lowpassfilter.gain.value = parseFloat(params.settings.lowpass);
+        this.highpassfilter.gain.value = parseFloat(params.settings.highpass);
+
+        this.gainNode.gain.value = params.settings.volume;
+
+        this.source = this.audioCtx.createBufferSource();
+        this.source.playbackRate.value = params.settings.speed;
+
         if (params.URL !== undefined) {
-            this.analyser = params.analyser;
-            this.setAudio(params.URL);
-            this.audioCtx = params.audContext;
-
-            this.destination = params.destination;
-
-            this.source = this.audioCtx.createBufferSource();
-            this.source.start(0);
-
-            this.gainNode = this.audioCtx.createGain();
-
-            //LOWPASS FILTER
-            this.lowpassfilter = this.audioCtx.createBiquadFilter();
-            this.lowpassfilter.type = "lowshelf";
-            this.lowpassfilter.frequency.value = 360;
-
-            //HIGHPASS FILTER
-            this.highpassfilter = this.audioCtx.createBiquadFilter();
-            this.highpassfilter.type = "highshelf";
-            this.highpassfilter.frequency.value = 3600;
-
-            this.connectAllProperties();
-
+            this.loadAudio(params.URL);
         } else {//if playing uploaded audio
-
-            this.analyser = params.analyser;
-            this.audioCtx = params.audContext;
-            this.destination = params.destination;
-            this.gainNode = this.audioCtx.createGain();
-
             this.audioCtx.decodeAudioData(params.uploadedAudio).then(function (buffer) {
-                console.log(this.highpass);
-                this.source = this.audioCtx.createBufferSource();
-
-                //LOWPASS FILTER
-                this.lowpassfilter = this.audioCtx.createBiquadFilter();
-                this.lowpassfilter.type = "lowshelf";
-                this.lowpassfilter.frequency.value = 300;
-
-                //HIGHPASS FILTER
-                this.highpassfilter = this.audioCtx.createBiquadFilter();
-                this.highpassfilter.type = "highshelf";
-                this.highpassfilter.frequency.value = 3500;
-
-                this.source.playbackRate.value = this.speed;
-                this.gainNode.gain.value = this.volume;
-
-                //if (isFinite(this.lowpass) && isFinite(this.highpass)) {
-                this.lowpassfilter.gain.value = this.lowpass;
-                this.highpassfilter.gain.value = this.highpass;
-                //}
                 this.source.buffer = buffer;
-                this.connectAllProperties();
-
-                this.source.start(0);
-
             }.bind(this));
         }
+
+        this.connectAllProperties();
+        this.source.start(0);
     }
 
-    setAudio(URL) {
-        if (!URL) {
+    loadAudio(path){
+        if (!path) {
             alert("No URL specified!");
             return;
         }
-        let promise = fetch(URL);
-        promise.then(this.receiveResponse.bind(this));
-    }
-
-    receiveResponse(response) {
-        response.arrayBuffer().then(this.receiveAudioData.bind(this));
-    }
-
-    receiveAudioData(audioData) {
-        this.audioCtx.decodeAudioData(audioData, this.setBuffer.bind(this))
-    }
-
-    stopAndDisconnect() {//for the case that a new sound was choosen
-        this.source.stop();
-        this.gainNode.disconnect(this.analyser);
-    }
-
-    setBuffer(buffer) {
-        this.source.buffer = buffer;
-        this.connectAllProperties();
+        fetch(path)
+            .then(data => data.arrayBuffer())
+            .then(arrayBuffer => this.audioCtx.decodeAudioData(arrayBuffer))
+            .then(decodedAudio => {
+                this.source.buffer = decodedAudio;
+            });
     }
 
     connectAllProperties() {
-        //connection to destination is needed for recording
-        /*
-        this.source.connect(this.gainNode).connect(this.analyser).connect(this.destination);
-        */
 
         this.source.connect(this.highpassfilter);
         this.highpassfilter.connect(this.lowpassfilter);

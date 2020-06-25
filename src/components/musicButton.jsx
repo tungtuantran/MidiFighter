@@ -5,9 +5,6 @@ import BackgroundBeatPlayer from '../audio/BackgroundBeat.js';
 
 class MusicButton extends Component {
 
-    buttonStyle = {
-        maxwidth:250
-    };
 
     constructor(){
         super();
