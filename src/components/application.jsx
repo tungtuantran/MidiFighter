@@ -168,6 +168,9 @@ class Application extends Component {
         }
         if(uploadedAudio.length == 0){ audioInfo = { settings: soundSettings[0] };}
         else{ audioInfo = {uploadedAudio: uploadedAudio[0].audio, settings: soundSettings[0] };}
+        audioInfo.audContext = this.audioCtx;
+        audioInfo.analyser = this.analyser;
+        audioInfo.destination = this.destination;
 
         return audioInfo;
     }
@@ -325,10 +328,8 @@ class Application extends Component {
             config={{duration: 400}}
             from={{opacity: 0}}
             to={{opacity: 1}}>
-                {props => <div style={props}><BackgroundBeat audioCtx={this.audioCtx}
-                    streamDestination={this.destination}
+                {props => <div style={props}><BackgroundBeat
                     onToolDelete={this.handleToolDeleted}
-                    analyserNode={this.analyser}
                     getInfoToSound={this.getInfoToSound}
                     beatsList= {this.state.beatsList}/></div>}
                 </Spring>;
@@ -368,9 +369,9 @@ class Application extends Component {
             </center>
             </div>
             <div className="col-md-6">
-            <ButtonPad audioCtx={this.audioCtx} analyserNode={this.analyser}
-            mappingSound={this.state.soundToMap} onMappingDone={this.handleSoundMapping}
-            getInfoToSound={this.getInfoToSound} streamDestination={this.destination} soundsList={this.state.soundsList}/>
+            <ButtonPad  mappingSound={this.state.soundToMap}
+            onMappingDone={this.handleSoundMapping}
+            getInfoToSound={this.getInfoToSound}  />
             {rTool}
             </div>
             <div className="col-sm-3">

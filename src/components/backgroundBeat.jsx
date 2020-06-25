@@ -34,22 +34,17 @@ class BackgroundBeat extends PureComponent {
 
     getNewPlayer(){
         var soundInfo = this.props.getInfoToSound(this.soundToPlay, true);
-        let playerArguments = {
-            audContext:this.props.audioCtx,
-            analyser: this.props.analyserNode,
-            destination: this.props.streamDestination,
-            settings: soundInfo.settings};
 
         if(soundInfo.uploadedAudio !== undefined){//if some uploaded sound should be played
             var dst = new ArrayBuffer(soundInfo.uploadedAudio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(soundInfo.uploadedAudio));
-            playerArguments.uploadedAudio = dst;
+            soundInfo.uploadedAudio = dst;
         }else{//if some standard sound should be played
             soundInfo.settings.speed = document.getElementById("speedSlider").value;
             soundInfo.settings.volume = document.getElementById("volumeSlider").value;
-            playerArguments.URL = process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav';
+            soundInfo.URL = process.env.PUBLIC_URL+'/backgroundbeatAudio/'+this.soundToPlay+'.wav';
         }
-        this.player = new BackgroundBeatPlayer(playerArguments);
+        this.player = new BackgroundBeatPlayer(soundInfo);
     }
 
     handlePlayBackground(){
@@ -102,12 +97,6 @@ class BackgroundBeat extends PureComponent {
 
 
         let dropdownText = "Choose Beat";
-
-        /*
-        if (this.props.soundToMap) {
-            dropdownText = this.props.soundToMap;
-        }
-        */
 
         const beatList = this.props.beatsList.map((beatName) =>
             <a className="dropdown-item" key={beatName.name+"beat"} href="#">{beatName.name}</a>

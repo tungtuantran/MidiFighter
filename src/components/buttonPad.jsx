@@ -38,20 +38,15 @@ class ButtonPad extends Component {
         if(buttons[musicButtonId-1].value === "."){return;}//if some button has no sound
 
         let soundInfo = this.props.getInfoToSound(buttons[musicButtonId-1].value, false);
-        let playerArguments = {
-            audContext:this.props.audioCtx,
-            analyser: this.props.analyserNode,
-            destination: this.props.streamDestination,
-            settings: soundInfo.settings};
 
         if(soundInfo.uploadedAudio !== undefined){//if some uploaded sound should be played
             var dst = new ArrayBuffer(soundInfo.uploadedAudio.byteLength);
             new Uint8Array(dst).set(new Uint8Array(soundInfo.uploadedAudio));
-            playerArguments.uploadedAudio = dst;
+            soundInfo.uploadedAudio = dst;
         }else{//if its a standard sound
-            playerArguments.URL = process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav';
+            soundInfo.URL = process.env.PUBLIC_URL+'/padSoundAudio/'+ buttons[musicButtonId-1].value +'.wav';
         }
-        new PadSoundPlayer(playerArguments);
+        new PadSoundPlayer(soundInfo);
     }
 
 
