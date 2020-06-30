@@ -97,6 +97,7 @@ Wie man in der Abbildung sehen kann, enthält die Komponente *Application* alle 
 Bei der Vendung der Web Audio API ist zu beachten, dass die Nodes, die für die Audio-Wiedergabe zuständig sind, mit dem Destination-Node verbunden werden. Erst dadurch kann man die wiedergegebene Audio hören. In der entwickelten Anwendung wurden jedoch zwischen Destination und dem Input mehrere Nodes zwischengeschaltet. Diese wären: 
 - **AnalyserNode** (damit alle abgespielten Sounds visualisiert werden können) 
 - **Effekte**, wie GainNode, Highpass-Filter, Lowpass-Filter (die auf das Audio-Input angewendet werden)
+
 Dazu kommt noch, dass die Audio-Wiedergabe aufgenommen werden kann. Dabei ist die Klasse MediaRecorder behilflich, die an den DestinationNode angeschlossen ist, sodass alles was wiedergegeben wird, aufzeichnet werden kann.
 
 ![web-audio-api:vom input zur destination](https://i.ibb.co/dDwBvsZ/webAPI.png)
