@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import $ from "jquery";
+import Octicon, { Dash} from '@primer/octicons-react'
 
 class AudioUploader extends Component {
 
@@ -51,6 +52,11 @@ class AudioUploader extends Component {
 
             });
         });
+
+        this.styles = {};
+        this.styles.hStyle = {
+            display: "inline"
+        };
     }
 
     inputStyle = {
@@ -67,6 +73,11 @@ class AudioUploader extends Component {
             soundColor = "btn btn-secondary";
         }
         return (<React.Fragment>
+
+
+            <div className="shadow p-3 mt-4 bg-light rounded">
+            <h4 style={this.styles.hStyle}>UploadingTool</h4>
+            <button className="btn btn-light  ml-1 mb-2"   onClick={() => this.props.onToolDelete("UploadingTool")}><Octicon icon={Dash}/></button>
 
             <div className="btn-group" role="group" aria-label="Basic example">
             <button type="button" className={soundColor} id="soundButton">Sound</button>
@@ -91,6 +102,8 @@ class AudioUploader extends Component {
             </button>
 
             <input style={this.inputStyle} id="file-input" type="file" accept="audio/*" name="file"/>
+
+            </div>
             </React.Fragment>);
     }
 

@@ -2,6 +2,7 @@ import ButtonPad from './buttonPad';
 import Visualizer from './visualizer.jsx';
 import BackgroundBeat from './backgroundBeat';
 import UploadingTool from './uploadingTool';
+import AudioUploader from './audioUploader';
 import RecordingTool from './recordingTool';
 import MapSound from './mapSound';
 import Metronome from './metronome';
@@ -313,13 +314,9 @@ class Application extends Component {
             from={{opacity: 0}}
             to={{opacity: 1}}>
                 {props => <div style={props}>
-                    <UploadingTool streamDestination={this.destination}
-                    audioCtx={this.audioCtx}
-                    analyserNode={this.analyser}
+                    <AudioUploader
                     setTypeOfAudio={this.setTypeOfAudio}
-                    onUploadSound={this.handleAudioLoading}
-                    soundsList={this.state.soundsList}
-                    beatsList={this.state.beatsList}
+                    onAudioLoad={this.handleAudioLoading}
                     onToolDelete={this.handleToolDeleted}/></div>}
                 </Spring>;
         }
